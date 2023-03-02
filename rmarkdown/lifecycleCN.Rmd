@@ -1,0 +1,34 @@
+---
+title: "Asset Allocation Strategies for Households in China: A Lifecycle Model"
+author: "Zijian (Zark) Wang"
+date: "`r Sys.Date()`"
+bibliography: RefLife.bib
+output: html_document
+---
+
+### 1 Objective Function
+
+The agent's value function is 
+$$
+V_t = u_t + \delta E_t[V_{t+1}]
+$$
+where the instantaneous utility $u_t$ is decided by a CRRA-style function:
+$$
+u_t = \frac{F_t^{1-\gamma_1}}{1-\gamma_1}+\psi_t\cdot \frac{\kappa W_t^{1-\gamma_2}}{1-\gamma_2}
+$$
+
+The parameter $\delta$ is discounting factor, $\gamma_1$ and $\gamma_2$ are risk aversion parameters, $\kappa$ captures bequest motive. $\psi_t$ denotes the mortality rate at age $t$ for the subpopulation to which the agent belongs, $W_t$ is the agent's net wealth, $M_t$ is a state variable jointly determined by the agent's consumption, house size, and distance to a savings goal. 
+
+There are three types of financial assets: short-term bond, long-term bond, and equity. The agent can allocate assets across these asset types via three savings accounts: (1) A tax-deferred defined-contribution pension account (referred to as "private pension account" hereafter). Each year prior to retirement, she can choose to deposit up to a certain amount into this account, and after retirement, she withdraws funds from it. (2) Liquid savings account. She can deposit or withdraw money to or from this account at any time. (3) Goal-based savings account, tied to a pre-defined savings goal. She continuously invests in this account until reaching the specific savings goal. Once the goal is reached, she will withdraw and consume all the funds in a lump sum, and will not invest any more into the account. As the utility she obtains from operating on this account is subject to whether the specific goal is reached, in our setting, we do not include this utility in her consumption. 
+
+We use $A^P$, $A^L$, $A^G$ to denote the balance of each account. Therefore, we can represent $F_t$ by
+$$
+F_t = [\alpha_1 C_t^{\rho} + \alpha_2H_t^{\rho} + \alpha_3G_t^\rho]^{1/\rho}
+$$
+
+where $\alpha_1$, $\alpha_2$, $\alpha_3$, $\rho$ are all parameters. $C_t$ denotes consumption, $H_t$ denotes house size, $G_t$ captures the utility that she obtains by getting close to the savings goal $\bar{G}$. 
+$$
+G_t = \min\{\bar{G},A^G_t\}
+$$
+
+Throughout the working life, the agent experiences the following five steps each year: (i) earning labor income and asset returns; (ii) making mandatory contributions to pension fund and housing fund; (iii) making retirement savings decisions and paying housing expenditure; (iv) paying income tax; (v) making investment decisions and paying consumption expenditure. After retirement, her labor income is replaced (at least partially) by pension benefit, and step (ii)(iv) is eliminated.
