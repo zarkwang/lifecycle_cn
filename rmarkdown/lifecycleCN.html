@@ -9,11 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Zijian (Zark) Wang" />
+<meta name="author" content="Zijian Wang" />
 
-<meta name="date" content="2023-02-28" />
+<meta name="date" content="2023-03-03" />
 
-<title>Asset Allocation Strategies for Households in China: A Lifecycle Model</title>
+<title>Asset Allocation Strategies for Chinese Urban Households: A Lifecycle Model</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -253,6 +253,28 @@ if (window.hljs) {
 
 
 
+<style type="text/css">
+
+div.csl-bib-body { }
+div.csl-entry {
+clear: both;
+}
+.hanging div.csl-entry {
+margin-left:2em;
+text-indent:-2em;
+}
+div.csl-left-margin {
+min-width:2em;
+float:left;
+}
+div.csl-right-inline {
+margin-left:2em;
+padding-left:1em;
+}
+div.csl-indent {
+margin-left: 2em;
+}
+</style>
 
 
 
@@ -350,62 +372,187 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">Asset Allocation Strategies for Households
-in China: A Lifecycle Model</h1>
-<h4 class="author">Zijian (Zark) Wang</h4>
-<h4 class="date">2023-02-28</h4>
+<h1 class="title toc-ignore">Asset Allocation Strategies for Chinese
+Urban Households: A Lifecycle Model</h1>
+<h4 class="author">Zijian Wang</h4>
+<h4 class="date">2023-03-03</h4>
 
 </div>
 
 
 <div id="objective-function" class="section level3">
 <h3>1 Objective Function</h3>
-<p>The agent’s value function is <span class="math display">\[
-V_t = u_t + \delta E_t[V_{t+1}]
-\]</span> where the instantaneous utility <span class="math inline">\(u_t\)</span> is decided by a CRRA-style function:
-<span class="math display">\[
-u_t = \frac{F_t^{1-\gamma_1}}{1-\gamma_1}+\psi_t\cdot \frac{\kappa
-W_t^{1-\gamma_2}}{1-\gamma_2}
+<p>We assume time is discrete and the agent’s preference is
+time-separable. The agent’s instantaneous utility at age <span class="math inline">\(t\)</span>, denoted by <span class="math inline">\(u_t\)</span>, is a weighted sum of three separate
+terms: the utility from the agent’s own consumption, the utility from
+spending on her children, and the utility from bequest. In each term, we
+use a CRRA-style utility function. Let <span class="math inline">\(C_t\)</span> be the agent’s consumption, <span class="math inline">\(G_t\)</span> be the money she spends on each child
+(we assume she spends equally on each child if she supports more than
+one child at a time), <span class="math inline">\(W_t\)</span> be her
+net wealth. We have:</p>
+<p><span class="math display">\[
+u_t = \frac{C_t^{1-\gamma}}{1-\gamma}+\kappa_1\cdot n_t^\alpha\frac{
+G_t^{1-\gamma}}{1-\gamma}+\kappa_2\cdot(1-\psi_t) \frac{
+W_t^{1-\gamma}}{1-\gamma}
 \]</span></p>
-<p>The parameter <span class="math inline">\(\delta\)</span> is
-discounting factor, <span class="math inline">\(\gamma_1\)</span> and
-<span class="math inline">\(\gamma_2\)</span> are risk aversion
-parameters, <span class="math inline">\(\kappa\)</span> captures bequest
-motive. <span class="math inline">\(\psi_t\)</span> denotes the
-mortality rate at age <span class="math inline">\(t\)</span> for the
-subpopulation to which the agent belongs, <span class="math inline">\(W_t\)</span> is the agent’s net wealth, <span class="math inline">\(M_t\)</span> is a state variable jointly
-determined by the agent’s consumption, house size, and distance to a
-savings goal.</p>
+<p>where <span class="math inline">\(\psi_t\)</span> denotes the
+probability that the agent survives at the end of age <span class="math inline">\(t\)</span>, <span class="math inline">\(n_t\)</span> denotes the number of children she
+has to support at age <span class="math inline">\(t\)</span>. The
+parameter <span class="math inline">\(\gamma\)</span> is the coefficient
+of relative risk aversion, <span class="math inline">\(\kappa_1\)</span>
+and <span class="math inline">\(\kappa_2\)</span> denote the relative
+importance of supporting her children and leaving a bequest, <span class="math inline">\(\alpha\)</span> determines the impact of the
+number of children to support on the overall utility.</p>
+<p>Following <span class="citation">Cocco (2005)</span> and <span class="citation">Yao and Zhang (2005)</span>, we construct <span class="math inline">\(C_t\)</span> by the Cobb-Douglas product of the
+quantities of non-housing consumption <span class="math inline">\(c_t\)</span> and housing consumption <span class="math inline">\(h_t\)</span>:</p>
+<p><span class="math display">\[
+C_t = c_t^\rho h_t^{1-\rho}
+\]</span></p>
+<p>where <span class="math inline">\(\rho\)</span> is the optimal
+proportion of non-housing consumption when the agent makes single-period
+consumption decisions. Hereafter, we assume the price per unit
+non-housing consumption and per unit housing consumption at age <span class="math inline">\(t\)</span> is 1 and <span class="math inline">\(v_t\)</span>, and <span class="math inline">\(h_t\)</span> also represents house size where the
+agent lives.</p>
+<p>Meanwhile, for utility from the agent’s spending on children, our
+setting is in line with <span class="citation">Barro and Becker
+(1989)</span>; for bequest utility, we refer to <span class="citation">Hubbard, Skinner, and Zeldes (1994)</span> that assumes
+the agent’s life span is risky.</p>
+<p>Let <span class="math inline">\(\beta\)</span> be the discounting
+factor, <span class="math inline">\(V_t\)</span> be the optimal
+state-value function for the agent. We can then construct the following
+Bellman equation: <span class="math display">\[
+V_t(s) = \max_a \{u_t(a,s) + \beta E_t[V_{t+1}(s)]|\Theta\}
+\]</span>where <span class="math inline">\(a\)</span> and <span class="math inline">\(s\)</span> denote the sets of action and state
+variables, <span class="math inline">\(\Theta\)</span> denotes the set
+of parameters in the model.</p>
 <p>There are three types of financial assets: short-term bond, long-term
-bond, and equity. The agent can allocate assets across these asset types
-via three savings accounts: (1) A tax-deferred defined-contribution
-pension account (referred to as “private pension account” hereafter).
-Each year prior to retirement, she can choose to deposit up to a certain
-amount into this account, and after retirement, she withdraws funds from
-it. (2) Liquid savings account. She can deposit or withdraw money to or
-from this account at any time. (3) Goal-based savings account, tied to a
-pre-defined savings goal. She continuously invests in this account until
-reaching the specific savings goal. Once the goal is reached, she will
-withdraw and consume all the funds in a lump sum, and will not invest
-any more into the account. As the utility she obtains from operating on
-this account is subject to whether the specific goal is reached, in our
-setting, we do not include this utility in her consumption.</p>
-<p>We use <span class="math inline">\(A^P\)</span>, <span class="math inline">\(A^L\)</span>, <span class="math inline">\(A^G\)</span> to denote the balance of each
-account. Therefore, we can represent <span class="math inline">\(F_t\)</span> by <span class="math display">\[
-F_t = [\alpha_1 C_t^{\rho} + \alpha_2H_t^{\rho} +
-\alpha_3G_t^\rho]^{1/\rho}
+bond, and equity. The agent can allocate assets across them via two
+savings accounts: (1) A tax-deferred defined-contribution pension
+account (referred to as “private pension account” hereafter). Each year
+prior to retirement, she can choose to deposit up to a certain amount
+into this account, and after retirement, she withdraws funds from it.
+(2) Liquid savings account. She can deposit or withdraw money to or from
+this account at any time. The agent can also invest in housing. We
+assume she can only rent or own one house at any one time.</p>
+<p>Throughout the working life, the agent experiences the following six
+steps each year: (i) earning labor income and asset return; (ii) making
+mandatory contribution to basic pension fund and housing fund; (iii)
+making voluntary contribution to private pension account; (iv) paying
+income tax; (v) making investment decisions, paying for housing and
+non-housing consumption and for her children’s consumption; (vi) dies in
+probability <span class="math inline">\(1-\psi_t\)</span> at the end of
+year.</p>
+<p>After retirement, the agent’s labor incomes are replaced by pension
+benefits, lump-sum redemption from housing fund, and returns from
+private pension. Meanwhile, she no longer needs to implement step
+(ii)-(iv), i.e. contribute to basic pension fund, housing fund and
+private pension, and pay income tax.</p>
+</div>
+<div id="income-process" class="section level3">
+<h3>2 Income Process</h3>
+<div id="labor-income" class="section level4">
+<h4>2.1 Labor Income</h4>
+<p>Let <span class="math inline">\(\tilde{Y}_t\)</span> denote the
+agent’s before-tax labor income. Let random variables <span class="math inline">\(z^u_t\)</span>, <span class="math inline">\(z^p_t\)</span>, <span class="math inline">\(z^q_t\)</span> be the employment status, permanent
+income shock, and transitory income shock (a transitory shock only
+affects the agent’s current income, while a permanent shock can affect
+her income in succeeding periods) . The deterministic part of labor
+income is represented by function <span class="math inline">\(f_y(t,X_t)\)</span>, where <span class="math inline">\(X_t\)</span> is the agent’s demographic features.
+Transitory shock <span class="math inline">\(z^q_t\)</span> follows an
+i.i.d. normal distribution. Permanent shock <span class="math inline">\(z^p_t\)</span> follows a AR(1) process with
+innovations drawn from a mixture of two normal distributions. Employment
+status <span class="math inline">\(z^u_t\)</span> can only be 0
+(employed) or 1 (unemployed), and <span class="math inline">\(P\{z^u_t=1\}\)</span> denotes the probability of
+being unemployed. Therefore, the agent’s labor income is determined by
+<span class="math display">\[
+\begin{split}
+&amp; \tilde{Y}_t = (1-z^u_t)\cdot e^{f_y(t,X_t) + z^p_t + z^q_t} \\
+&amp; z^q_t \sim N(0,\sigma_q^2) \\
+&amp; z^p_t = \beta^pz^p_{t-1} + \eta_t \\
+&amp; \eta_t \sim \left\{
+\begin{split}
+&amp; N(\mu_{\eta_1},\sigma_{\eta_1}) \; \text{with prob.} \,p_\eta \\
+&amp; N(\mu_{\eta_2},\sigma_{\eta_2}) \; \text{with prob.} \,1-p_\eta\\
+\end{split}
+\right. \\
+&amp; P\{z^u_t=1\} = \frac{1}{1+e^{-f_u(t,z^p_t)}}
+\end{split}
 \]</span></p>
-<p>where <span class="math inline">\(\alpha_1\)</span>, <span class="math inline">\(\alpha_2\)</span>, <span class="math inline">\(\alpha_3\)</span>, <span class="math inline">\(\rho\)</span> are all parameters. <span class="math inline">\(C_t\)</span> denotes consumption, <span class="math inline">\(H_t\)</span> denotes house size, <span class="math inline">\(G_t\)</span> captures the utility that she obtains
-by getting close to the savings goal <span class="math inline">\(\bar{G}\)</span>. <span class="math display">\[
-G_t = \min\{\bar{G},A^G_t\}
+<p>We assume <span class="math inline">\(\mu_{\eta_1}p_\eta +
+\mu_{\eta_2}(1-p_\eta)=0\)</span>, and <span class="math inline">\(\mu_{\eta,1}&lt;0\)</span>. For simplicity, we set
+<span class="math display">\[
+f_u(t,z^p_t) = \beta^u_0+\beta^u_1\cdot t+\beta^u_2\cdot
+z^p_t+\beta^u_3\cdot t\cdot z^p_t
 \]</span></p>
-<p>Throughout the working life, the agent experiences the following five
-steps each year: (i) earning labor income and asset returns; (ii) making
-mandatory contributions to pension fund and housing fund; (iii) making
-retirement savings decisions and paying housing expenditure; (iv) paying
-income tax; (v) making investment decisions and paying consumption
-expenditure. After retirement, her labor income is replaced (at least
-partially) by pension benefit, and step (ii)(iv) is eliminated.</p>
+</div>
+<div id="social-security" class="section level4">
+<h4>2.2 Social Security</h4>
+<p>China’s social security system consists of five mandatory insurances
+and a housing fund. During the working life, the agent spends a portion,
+say <span class="math inline">\(\xi_c\)</span>, of her permanent income
+(which we call “social security contribution base”), contributing to
+these social security schemes each year. Her employer will make match
+contributions. The contribution base cannot be more than 3 times the
+province-wide average wage or less than 0.6 times the province-wide
+average wage. The contributions are deductible under income tax.</p>
+<p>We let <span class="math inline">\(Y^*_t\)</span> be the
+province-wide average wage; then, the agent’s contribution base at age
+<span class="math inline">\(t\)</span> is <span class="math display">\[
+Y^B_t=\max\{\min\{\tilde{Y}_t e^{-z^q_t},3Y^*_t\},0.6Y^*_t\}
+\]</span> For simplicity, we assume <span class="math inline">\(Y^*_t\)</span> is a AR(1) process.</p>
+</div>
+<div id="pension-benefit" class="section level4">
+<h4>2.3 Pension Benefit</h4>
+<p>One of the China’s five social insurance schemes is pension
+insurance. After retirement, the agent receives pension benefit (which
+is called “basic pension”) each year. The amount of benefit is dependent
+on her previous contributions to pension insurance, and the
+province-wide average wage.</p>
+<p>To calculate pension benefit, we set the ratio of the agent’s pension
+contribution to her contribution base is <span class="math inline">\(\xi_m\)</span> (<span class="math inline">\(\xi_m&lt;\xi_c\)</span>), the ratio of her
+employer’s match contribution in pension to the contribution base is
+<span class="math inline">\(\xi_n\)</span>, the interest rate for the
+fund in basic pension account is <span class="math inline">\(i_b\)</span>, the life expectancy in China is
+<span class="math inline">\(t_{exp}\)</span>. The agent starts working
+at age <span class="math inline">\(t_0\)</span>, retires at <span class="math inline">\(t_{ret}\)</span>. The agent’s basic pension
+consists of two parts. The first part, which we name <span class="math inline">\(B^1_t\)</span>, is <span class="math display">\[
+B^1_t =
+Y^*_t\left[\sum_{\tau=t_0}^{t_{ret}-1}\left(\frac{Y^B_\tau}{Y^*_\tau}\right)
++ (t_{ret}-t_0)\right]\times0.5\times1\%
+\]</span> The second part of pension benefit, which we name <span class="math inline">\(B^2_t\)</span>, is determined by the balance of
+the agent’s basic pension account, <span class="math inline">\(A^B_t\)</span>, at the time of retirement, where
+<span class="math inline">\(A^b_{t_0}=0\)</span>.</p>
+<p><span class="math display">\[
+\begin{split}
+&amp; A^B_{t_{ret}}=\sum_{\tau=t_0}^{t_{ret}-1}
+\left( A^B_\tau\cdot (1+i_b)+Y^B_\tau \cdot (\xi_m+\xi_n)\right) \\
+&amp; B^2_t =A^B_{t_{ret}} /
+\left(\frac{1-(1+i_b)^{-(t_{exp}-t_{ret})}}{1-(1+i_b)^{-1}}\right)\\
+\end{split}
+\]</span></p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-barro_fertility_1989" class="csl-entry">
+Barro, Robert J., and Gary S. Becker. 1989. <span>“Fertility Choice in a
+Model of Economic Growth.”</span> <em>Econometrica</em> 57 (2): 481–501.
+<a href="https://ideas.repec.org//a/ecm/emetrp/v57y1989i2p481-501.html">https://ideas.repec.org//a/ecm/emetrp/v57y1989i2p481-501.html</a>.
+</div>
+<div id="ref-cocco_portfolio_2005" class="csl-entry">
+Cocco, João F. 2005. <span>“Portfolio Choice in the Presence of
+Housing.”</span> <em>Rev. Financ. Stud.</em> 18 (2): 535–67. <a href="https://doi.org/10.1093/rfs/hhi006">https://doi.org/10.1093/rfs/hhi006</a>.
+</div>
+<div id="ref-hubbard_importance_1994" class="csl-entry">
+Hubbard, R. Glenn, Jonathan Skinner, and Stephen P. Zeldes. 1994.
+<span>“The Importance of Precautionary Motives in Explaining Individual
+and Aggregate Saving.”</span> <em>Carnegie-Rochester Conference Series
+on Public Policy</em> 40 (June): 59–125. <a href="https://doi.org/10.1016/0167-2231(94)90004-3">https://doi.org/10.1016/0167-2231(94)90004-3</a>.
+</div>
+<div id="ref-yao_optimal_2005" class="csl-entry">
+Yao, Rui, and Harold H. Zhang. 2005. <span>“Optimal Consumption and
+Portfolio Choices with Risky Housing and Borrowing Constraints.”</span>
+<em>Rev. Financ. Stud.</em> 18 (1): 197–239. <a href="https://doi.org/10.1093/rfs/hhh007">https://doi.org/10.1093/rfs/hhh007</a>.
+</div>
+</div>
+</div>
 </div>
 
 
