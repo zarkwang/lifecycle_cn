@@ -11,9 +11,9 @@
 
 <meta name="author" content="Zijian Wang" />
 
-<meta name="date" content="2023-03-03" />
+<meta name="date" content="2023-03-05" />
 
-<title>Asset Allocation Strategies for Chinese Urban Households: A Lifecycle Model</title>
+<title>A Lifecycle Model for Chinese Urban Households</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -372,86 +372,171 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">Asset Allocation Strategies for Chinese
-Urban Households: A Lifecycle Model</h1>
+<h1 class="title toc-ignore">A Lifecycle Model for Chinese Urban
+Households</h1>
 <h4 class="author">Zijian Wang</h4>
-<h4 class="date">2023-03-03</h4>
+<h4 class="date">2023-03-05</h4>
 
 </div>
 
+<div id="TOC">
+<ul>
+<li><a href="#model-framework" id="toc-model-framework"><span class="toc-section-number">1</span> Model Framework</a>
+<ul>
+<li><a href="#objective-function" id="toc-objective-function"><span class="toc-section-number">1.1</span> Objective Function</a></li>
+<li><a href="#income-process" id="toc-income-process"><span class="toc-section-number">1.2</span> Income Process</a>
+<ul>
+<li><a href="#labor-income" id="toc-labor-income"><span class="toc-section-number">1.2.1</span> Labor Income</a></li>
+<li><a href="#income-tax-and-social-security-contributions" id="toc-income-tax-and-social-security-contributions"><span class="toc-section-number">1.2.2</span> Income Tax and Social Security
+Contributions</a></li>
+<li><a href="#pension-benefit" id="toc-pension-benefit"><span class="toc-section-number">1.2.3</span> Pension Benefit</a></li>
+</ul></li>
+<li><a href="#financial-assets" id="toc-financial-assets"><span class="toc-section-number">1.3</span> Financial Assets</a>
+<ul>
+<li><a href="#asset-markets" id="toc-asset-markets"><span class="toc-section-number">1.3.1</span> Asset Markets</a></li>
+<li><a href="#private-pension" id="toc-private-pension"><span class="toc-section-number">1.3.2</span> Private Pension</a></li>
+<li><a href="#liquid-savings" id="toc-liquid-savings"><span class="toc-section-number">1.3.3</span> Liquid Savings</a></li>
+</ul></li>
+<li><a href="#housing" id="toc-housing"><span class="toc-section-number">1.4</span> Housing</a>
+<ul>
+<li><a href="#homeonwership" id="toc-homeonwership"><span class="toc-section-number">1.4.1</span> Homeonwership</a></li>
+<li><a href="#housing-fund" id="toc-housing-fund"><span class="toc-section-number">1.4.2</span> Housing Fund</a></li>
+</ul></li>
+<li><a href="#health-expenditure" id="toc-health-expenditure"><span class="toc-section-number">1.5</span> Health Expenditure</a></li>
+<li><a href="#parental-care" id="toc-parental-care"><span class="toc-section-number">1.6</span> Parental Care</a></li>
+<li><a href="#consumption-budget" id="toc-consumption-budget"><span class="toc-section-number">1.7</span> Consumption Budget</a></li>
+</ul></li>
+<li><a href="#parametrization" id="toc-parametrization"><span class="toc-section-number">2</span> Parametrization</a></li>
+</ul>
+</div>
 
-<div id="objective-function" class="section level3">
-<h3>1 Objective Function</h3>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX:{
+      equationNumbers:{ 
+          autoNumber: "all" 
+          } 
+      }
+});
+</script>
+<div id="model-framework" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Model Framework</h1>
+<div id="objective-function" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Objective
+Function</h2>
 <p>We assume time is discrete and the agent’s preference is
 time-separable. The agent’s instantaneous utility at age <span class="math inline">\(t\)</span>, denoted by <span class="math inline">\(u_t\)</span>, is a weighted sum of three separate
-terms: the utility from the agent’s own consumption, the utility from
-spending on her children, and the utility from bequest. In each term, we
-use a CRRA-style utility function. Let <span class="math inline">\(C_t\)</span> be the agent’s consumption, <span class="math inline">\(G_t\)</span> be the money she spends on each child
-(we assume she spends equally on each child if she supports more than
-one child at a time), <span class="math inline">\(W_t\)</span> be her
-net wealth. We have:</p>
-<p><span class="math display">\[
-u_t = \frac{C_t^{1-\gamma}}{1-\gamma}+\kappa_1\cdot n_t^\alpha\frac{
-G_t^{1-\gamma}}{1-\gamma}+\kappa_2\cdot(1-\psi_t) \frac{
-W_t^{1-\gamma}}{1-\gamma}
+terms: the utility from the agent’s own health and consumption <span class="math inline">\(u^1_t\)</span>, the utility from spending on her
+children <span class="math inline">\(u^2_t\)</span>, and the utility
+from bequest <span class="math inline">\(u^3_t\)</span>. Let <span class="math inline">\(\kappa_1\)</span> and <span class="math inline">\(\kappa_2\)</span> be the relative importance of
+spending on her children and leaving a bequest, we have:</p>
+<p><span class="math display">\[ \label{eq:utility}
+u_t = u^1_t + \kappa_1\cdot u^2_t + \kappa_3\cdot u^3_t
 \]</span></p>
-<p>where <span class="math inline">\(\psi_t\)</span> denotes the
-probability that the agent survives at the end of age <span class="math inline">\(t\)</span>, <span class="math inline">\(n_t\)</span> denotes the number of children she
-has to support at age <span class="math inline">\(t\)</span>. The
-parameter <span class="math inline">\(\gamma\)</span> is the coefficient
-of relative risk aversion, <span class="math inline">\(\kappa_1\)</span>
-and <span class="math inline">\(\kappa_2\)</span> denote the relative
-importance of supporting her children and leaving a bequest, <span class="math inline">\(\alpha\)</span> determines the impact of the
-number of children to support on the overall utility.</p>
-<p>Following <span class="citation">Cocco (2005)</span> and <span class="citation">Yao and Zhang (2005)</span>, we construct <span class="math inline">\(C_t\)</span> by the Cobb-Douglas product of the
-quantities of non-housing consumption <span class="math inline">\(c_t\)</span> and housing consumption <span class="math inline">\(h_t\)</span>:</p>
+<p>In each term, we use a CRRA-style utility function. For the first
+term, let <span class="math inline">\(e_t\)</span> be the agent’s health
+status at age <span class="math inline">\(t\)</span> (greater <span class="math inline">\(e_t\)</span> for better health status), <span class="math inline">\(C_t\)</span> be her own consumption. Following
+<span class="citation">Palumbo (1999)</span> and <span class="citation">De Nardi, French, and Jones (2010)</span>, we define
+<span class="math inline">\(u^1_t\)</span> as a product of the agent’s
+consumption utility and a multiplier <span class="math inline">\(E(e_t)\)</span>, which is a function of her health
+status:</p>
 <p><span class="math display">\[
+u^1_t = E(e_t)\cdot\frac{C_t^{1-\gamma}}{1-\gamma}
+\]</span></p>
+<p>where <span class="math inline">\(\gamma\)</span> is the coefficient
+of relative risk aversion. <span class="math inline">\(E(e_t)\)</span>
+is increasing with <span class="math inline">\(e_t\)</span>, implying
+that health and consumption are complements to each other. We then
+construct <span class="math inline">\(C_t\)</span> by the Cobb-Douglas
+product of the quantity of non-housing consumption <span class="math inline">\(c_t\)</span> and of housing consumption <span class="math inline">\(h_t\)</span>:</p>
+<p><span class="math display">\[\label{eq:consumption}
 C_t = c_t^\rho h_t^{1-\rho}
 \]</span></p>
-<p>where <span class="math inline">\(\rho\)</span> is the optimal
-proportion of non-housing consumption when the agent makes single-period
-consumption decisions. Hereafter, we assume the price per unit
-non-housing consumption and per unit housing consumption at age <span class="math inline">\(t\)</span> is 1 and <span class="math inline">\(v_t\)</span>, and <span class="math inline">\(h_t\)</span> also represents house size where the
-agent lives.</p>
-<p>Meanwhile, for utility from the agent’s spending on children, our
-setting is in line with <span class="citation">Barro and Becker
-(1989)</span>; for bequest utility, we refer to <span class="citation">Hubbard, Skinner, and Zeldes (1994)</span> that assumes
-the agent’s life span is risky.</p>
+<p>As is pointed out in <span class="citation">Cocco (2005)</span> and
+<span class="citation">Yao and Zhang (2005)</span>, the parameter <span class="math inline">\(\rho\)</span> in equation (<span class="math inline">\(\ref{eq:consumption}\)</span>) can be interpreted
+as the optimal proportion of non-housing consumption when the agent
+makes single-period consumption decisions. Hereafter, we assume the
+price per unit non-housing consumption and per unit housing consumption
+is 1 and <span class="math inline">\(v_t\)</span>, and let <span class="math inline">\(h_t\)</span> also represent the size of house
+where the agent lives.</p>
+<p>For the second term in equation (<span class="math inline">\(\ref{eq:utility}\)</span>), we assume the agent’s
+<span class="math inline">\(u^2_t\)</span> is the sum of the utility
+from her children’s consumption and the utility from the assets she has
+transferred to each child. If the agent has to supports more than one
+child at a time, we assume each child consumes equally. Let <span class="math inline">\(n_t\)</span> denotes the number of children she
+has to support at age <span class="math inline">\(t\)</span>, <span class="math inline">\(F_t\)</span> be the consumption of each child,
+<span class="math inline">\(G_{it}\)</span> be the utility she obtained
+at age <span class="math inline">\(t\)</span> through the assets having
+transferred to child <span class="math inline">\(i\)</span>, we
+have:</p>
+<p><span class="math display">\[
+u^2_t = n_t^\alpha\frac{F_t^{1-\gamma}}{1-\gamma} +
+\sum^{n_t}_{i=1}G_{it}
+\]</span></p>
+<p>where the first term (left to the plus sign) represents the agent’s
+utility derived from her children’s consumption, <span class="math inline">\(\alpha\)</span> determines the impact of the
+number of children to support on the overall utility. Our setting is in
+line with <span class="citation">Barro and Becker (1989)</span>.</p>
+<p>For the third term in equation (<span class="math inline">\(\ref{eq:utility}\)</span>), we refer to <span class="citation">Hubbard, Skinner, and Zeldes (1994)</span> that assumes
+the agent’s life span is risky. Let <span class="math inline">\(W_t\)</span> be her net wealth at the end of age
+<span class="math inline">\(t\)</span>, <span class="math inline">\(\psi_t\)</span> be the her survival probability at
+that moment, we have:</p>
+<p><span class="math display">\[
+u^3_t = (1-\psi_t) \frac{ W_t^{1-\gamma}}{1-\gamma}
+\]</span></p>
+<p>We assume the longest time she can live is <span class="math inline">\(T\)</span>. Thus, when <span class="math inline">\(t=T\)</span>, she dies with probability 1,
+i.e. <span class="math inline">\(\psi_T=0\)</span>.</p>
 <p>Let <span class="math inline">\(\beta\)</span> be the discounting
 factor, <span class="math inline">\(V_t\)</span> be the optimal
-state-value function for the agent. We can then construct the following
-Bellman equation: <span class="math display">\[
+state-value function for the agent. We can construct the following
+Bellman equation:</p>
+<p><span class="math display">\[
 V_t(s) = \max_a \{u_t(a,s) + \beta E_t[V_{t+1}(s)]|\Theta\}
-\]</span>where <span class="math inline">\(a\)</span> and <span class="math inline">\(s\)</span> denote the sets of action and state
+\]</span> where <span class="math inline">\(a\)</span> and <span class="math inline">\(s\)</span> denote the sets of action and state
 variables, <span class="math inline">\(\Theta\)</span> denotes the set
 of parameters in the model.</p>
 <p>There are three types of financial assets: short-term bond, long-term
 bond, and equity. The agent can allocate assets across them via two
 savings accounts: (1) A tax-deferred defined-contribution pension
-account (referred to as “private pension account” hereafter). Each year
-prior to retirement, she can choose to deposit up to a certain amount
-into this account, and after retirement, she withdraws funds from it.
-(2) Liquid savings account. She can deposit or withdraw money to or from
-this account at any time. The agent can also invest in housing. We
-assume she can only rent or own one house at any one time.</p>
+account (referred to as “private pension account” hereafter). She can
+invest in this account each year prior to retirement, and withdraws
+funds from it after retirement. (2) Liquid savings account. She can
+deposit or withdraw money to or from this account at any time.
+Meanwhile, the agent can invest in housing. We assume she can and can
+only either rent or own one house at a time.</p>
 <p>Throughout the working life, the agent experiences the following six
-steps each year: (i) earning labor income and asset return; (ii) making
-mandatory contribution to basic pension fund and housing fund; (iii)
-making voluntary contribution to private pension account; (iv) paying
-income tax; (v) making investment decisions, paying for housing and
-non-housing consumption and for her children’s consumption; (vi) dies in
-probability <span class="math inline">\(1-\psi_t\)</span> at the end of
-year.</p>
-<p>After retirement, the agent’s labor incomes are replaced by pension
-benefits, lump-sum redemption from housing fund, and returns from
-private pension. Meanwhile, she no longer needs to implement step
-(ii)-(iv), i.e. contribute to basic pension fund, housing fund and
-private pension, and pay income tax.</p>
+steps each year: (i) earning labor income and asset returns; (ii) making
+mandatory contribution to social insurances and housing fund; (iii)
+making voluntary contribution to private pension; (iv) paying income
+tax; (v) making investment decisions, paying for her own and her
+children’s consumption; (vi) dies at the end of year with probability
+<span class="math inline">\(1-\psi_t\)</span> . After retirement, the
+agent’s labor incomes are replaced by pension benefits, lump-sum
+redemption from housing fund, and returns from private pension. Besides,
+she no longer needs to implement step (ii)-(iv).</p>
+<p>One puzzle about China that has received considerable attention is
+why its household savings rate rose rapidly from the 1980s to the 2010s
+and has remained consistently at a high level. This cannot be simply
+explained by weak social security system, precautionary saving motive,
+or the increased ratio of working population. <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> Some influential
+explanations focus on inter-generational transfer. Curtis, Lugauer, and
+Mark <span class="citation">(2015, 2017)</span> propose that the
+one-child policy, starting from 1980 and ending in 2016, led to a
+decline in family size, thus the Chinese parents can spend less in their
+children’s consumption and have more to save. <span class="citation">Du
+and Wei (2013)</span> and <span class="citation">Wei and Zhang
+(2011)</span> propose and verify a theory named “competitive saving
+motive”, that is, Chinese parents tend to accumulate and transfer assets
+for and to their children, in order to increase their children’s
+competitive power on marriage market. To capture these insights, we
+introduce the spending on children to the agent’s objective function. We
+also assume, at the time that one of her children gets married, she
+transfers a certain amount of assets to that child.</p>
 </div>
-<div id="income-process" class="section level3">
-<h3>2 Income Process</h3>
-<div id="labor-income" class="section level4">
-<h4>2.1 Labor Income</h4>
+<div id="income-process" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Income Process</h2>
+<div id="labor-income" class="section level3" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Labor Income</h3>
 <p>Let <span class="math inline">\(\tilde{Y}_t\)</span> denote the
 agent’s before-tax labor income. Let random variables <span class="math inline">\(z^u_t\)</span>, <span class="math inline">\(z^p_t\)</span>, <span class="math inline">\(z^q_t\)</span> be the employment status, permanent
 income shock, and transitory income shock (a transitory shock only
@@ -463,8 +548,9 @@ i.i.d. normal distribution. Permanent shock <span class="math inline">\(z^p_t\)<
 innovations drawn from a mixture of two normal distributions. Employment
 status <span class="math inline">\(z^u_t\)</span> can only be 0
 (employed) or 1 (unemployed), and <span class="math inline">\(P\{z^u_t=1\}\)</span> denotes the probability of
-being unemployed. Therefore, the agent’s labor income is determined by
-<span class="math display">\[
+being unemployed. Therefore, the agent’s labor income is determined
+by</p>
+<span class="math display">\[\begin{equation}
 \begin{split}
 &amp; \tilde{Y}_t = (1-z^u_t)\cdot e^{f_y(t,X_t) + z^p_t + z^q_t} \\
 &amp; z^q_t \sim N(0,\sigma_q^2) \\
@@ -477,7 +563,7 @@ being unemployed. Therefore, the agent’s labor income is determined by
 \right. \\
 &amp; P\{z^u_t=1\} = \frac{1}{1+e^{-f_u(t,z^p_t)}}
 \end{split}
-\]</span></p>
+\end{equation}\]</span>
 <p>We assume <span class="math inline">\(\mu_{\eta_1}p_\eta +
 \mu_{\eta_2}(1-p_\eta)=0\)</span>, and <span class="math inline">\(\mu_{\eta,1}&lt;0\)</span>. For simplicity, we set
 <span class="math display">\[
@@ -485,8 +571,9 @@ f_u(t,z^p_t) = \beta^u_0+\beta^u_1\cdot t+\beta^u_2\cdot
 z^p_t+\beta^u_3\cdot t\cdot z^p_t
 \]</span></p>
 </div>
-<div id="social-security" class="section level4">
-<h4>2.2 Social Security</h4>
+<div id="income-tax-and-social-security-contributions" class="section level3" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> Income Tax and
+Social Security Contributions</h3>
 <p>China’s social security system consists of five mandatory insurances
 and a housing fund. During the working life, the agent spends a portion,
 say <span class="math inline">\(\xi_c\)</span>, of her permanent income
@@ -501,8 +588,9 @@ province-wide average wage; then, the agent’s contribution base at age
 Y^B_t=\max\{\min\{\tilde{Y}_t e^{-z^q_t},3Y^*_t\},0.6Y^*_t\}
 \]</span> For simplicity, we assume <span class="math inline">\(Y^*_t\)</span> is a AR(1) process.</p>
 </div>
-<div id="pension-benefit" class="section level4">
-<h4>2.3 Pension Benefit</h4>
+<div id="pension-benefit" class="section level3" number="1.2.3">
+<h3><span class="header-section-number">1.2.3</span> Pension
+Benefit</h3>
 <p>One of the China’s five social insurance schemes is pension
 insurance. After retirement, the agent receives pension benefit (which
 is called “basic pension”) each year. The amount of benefit is dependent
@@ -530,6 +618,45 @@ the agent’s basic pension account, <span class="math inline">\(A^B_t\)</span>,
 \left(\frac{1-(1+i_b)^{-(t_{exp}-t_{ret})}}{1-(1+i_b)^{-1}}\right)\\
 \end{split}
 \]</span></p>
+</div>
+</div>
+<div id="financial-assets" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Financial Assets</h2>
+<div id="asset-markets" class="section level3" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> Asset Markets</h3>
+</div>
+<div id="private-pension" class="section level3" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> Private
+Pension</h3>
+</div>
+<div id="liquid-savings" class="section level3" number="1.3.3">
+<h3><span class="header-section-number">1.3.3</span> Liquid Savings</h3>
+</div>
+</div>
+<div id="housing" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Housing</h2>
+<div id="homeonwership" class="section level3" number="1.4.1">
+<h3><span class="header-section-number">1.4.1</span> Homeonwership</h3>
+</div>
+<div id="housing-fund" class="section level3" number="1.4.2">
+<h3><span class="header-section-number">1.4.2</span> Housing Fund</h3>
+</div>
+</div>
+<div id="health-expenditure" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Health
+Expenditure</h2>
+</div>
+<div id="parental-care" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> Parental Care</h2>
+</div>
+<div id="consumption-budget" class="section level2" number="1.7">
+<h2><span class="header-section-number">1.7</span> Consumption
+Budget</h2>
+</div>
+</div>
+<div id="parametrization" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Parametrization</h1>
+<p>tab</p>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-barro_fertility_1989" class="csl-entry">
 Barro, Robert J., and Gary S. Becker. 1989. <span>“Fertility Choice in a
@@ -540,11 +667,46 @@ Model of Economic Growth.”</span> <em>Econometrica</em> 57 (2): 481–501.
 Cocco, João F. 2005. <span>“Portfolio Choice in the Presence of
 Housing.”</span> <em>Rev. Financ. Stud.</em> 18 (2): 535–67. <a href="https://doi.org/10.1093/rfs/hhi006">https://doi.org/10.1093/rfs/hhi006</a>.
 </div>
+<div id="ref-curtis_demographic_2015" class="csl-entry">
+Curtis, Chadwick C., Steven Lugauer, and Nelson C. Mark. 2015.
+<span>“Demographic Patterns and Household Saving in China.”</span>
+<em>American Economic Journal: Macroeconomics</em> 7 (2): 58–94. <a href="https://doi.org/10.1257/mac.20130105">https://doi.org/10.1257/mac.20130105</a>.
+</div>
+<div id="ref-curtis_demographics_2017" class="csl-entry">
+———. 2017. <span>“Demographics and Aggregate Household Saving in Japan,
+China, and India.”</span> <em>Journal of Macroeconomics</em> 51 (March):
+175–91. <a href="https://doi.org/10.1016/j.jmacro.2017.01.002">https://doi.org/10.1016/j.jmacro.2017.01.002</a>.
+</div>
+<div id="ref-de_nardi_why_2010" class="csl-entry">
+De Nardi, Mariacristina, Eric French, and John B. Jones. 2010.
+<span>“Why Do the Elderly Save? The Role of Medical Expenses.”</span>
+<em>Journal of Political Economy</em> 118 (1): 39–75. <a href="https://doi.org/10.1086/651674">https://doi.org/10.1086/651674</a>.
+</div>
+<div id="ref-du_theory_2013" class="csl-entry">
+Du, Qingyuan, and Shang-Jin Wei. 2013. <span>“A Theory of the
+Competitive Saving Motive.”</span> <em>Journal of International
+Economics</em> 91 (2): 275–89. <a href="https://doi.org/10.1016/j.jinteco.2013.09.003">https://doi.org/10.1016/j.jinteco.2013.09.003</a>.
+</div>
 <div id="ref-hubbard_importance_1994" class="csl-entry">
 Hubbard, R. Glenn, Jonathan Skinner, and Stephen P. Zeldes. 1994.
 <span>“The Importance of Precautionary Motives in Explaining Individual
 and Aggregate Saving.”</span> <em>Carnegie-Rochester Conference Series
 on Public Policy</em> 40 (June): 59–125. <a href="https://doi.org/10.1016/0167-2231(94)90004-3">https://doi.org/10.1016/0167-2231(94)90004-3</a>.
+</div>
+<div id="ref-modigliani_chinese_2004" class="csl-entry">
+Modigliani, Franco, and Shi Larry Cao. 2004. <span>“The Chinese Saving
+Puzzle and the Life-Cycle Hypothesis.”</span> <em>Journal of Economic
+Literature</em> 42 (1): 145–70. <a href="https://doi.org/10.1257/002205104773558074">https://doi.org/10.1257/002205104773558074</a>.
+</div>
+<div id="ref-palumbo_uncertain_1999" class="csl-entry">
+Palumbo, Michael G. 1999. <span>“Uncertain Medical Expenses and
+Precautionary Saving Near the End of the Life Cycle.”</span> <em>Rev
+Econ Studies</em> 66 (2): 395–421. <a href="https://doi.org/10.1111/1467-937X.00092">https://doi.org/10.1111/1467-937X.00092</a>.
+</div>
+<div id="ref-wei_competitive_2011" class="csl-entry">
+Wei, Shang-Jin, and Xiaobo Zhang. 2011. <span>“The Competitive Saving
+Motive: Evidence from Rising Sex Ratios and Savings Rates in
+China.”</span> <em>Journal of Political Economy</em> 119 (3): 511–64. <a href="https://doi.org/10.1086/660887">https://doi.org/10.1086/660887</a>.
 </div>
 <div id="ref-yao_optimal_2005" class="csl-entry">
 Yao, Rui, and Harold H. Zhang. 2005. <span>“Optimal Consumption and
@@ -553,6 +715,12 @@ Portfolio Choices with Risky Housing and Borrowing Constraints.”</span>
 </div>
 </div>
 </div>
+<div class="footnotes footnotes-end-of-document">
+<hr />
+<ol>
+<li id="fn1"><p>For an introduction to the Chinese saving puzzle, see
+<span class="citation">Modigliani and Cao (2004)</span>.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
 
 

@@ -1,46 +1,87 @@
 ---
-title: "Asset Allocation Strategies for Chinese Urban Households: A Lifecycle Model"
+title: "A Lifecycle Model for Chinese Urban Households"
 author: "Zijian Wang"
 date: "`r Sys.Date()`"
 bibliography: RefLife.bib
-output: html_document
+output: 
+  html_document:
+    toc: true
+    number_sections: true
 ---
 
-### 1 Objective Function
+```{=html}
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX:{
+      equationNumbers:{ 
+          autoNumber: "all" 
+          } 
+      }
+});
+</script>
+```
+# Model Framework
 
-We assume time is discrete and the agent's preference is time-separable. The agent's instantaneous utility at age $t$, denoted by $u_t$, is a weighted sum of three separate terms: the utility from the agent's own consumption, the utility from spending on her children, and the utility from bequest. In each term, we use a CRRA-style utility function. Let $C_t$ be the agent's consumption, $G_t$ be the money she spends on each child (we assume she spends equally on each child if she supports more than one child at a time), $W_t$ be her net wealth. We have:
+## Objective Function
+
+We assume time is discrete and the agent's preference is time-separable. The agent's instantaneous utility at age $t$, denoted by $u_t$, is a weighted sum of three separate terms: the utility from the agent's own health and consumption $u^1_t$, the utility from spending on her children $u^2_t$, and the utility from bequest $u^3_t$. Let $\kappa_1$ and $\kappa_2$ be the relative importance of spending on her children and leaving a bequest, we have:
+
+$$ \label{eq:utility}
+u_t = u^1_t + \kappa_1\cdot u^2_t + \kappa_3\cdot u^3_t 
+$$
+
+In each term, we use a CRRA-style utility function. For the first term, let $e_t$ be the agent's health status at age $t$ (greater $e_t$ for better health status), $C_t$ be her own consumption. Following @palumbo_uncertain_1999 and @de_nardi_why_2010, we define $u^1_t$ as a product of the agent's consumption utility and a multiplier $E(e_t)$, which is a function of her health status:
 
 $$
-u_t = \frac{C_t^{1-\gamma}}{1-\gamma}+\kappa_1\cdot n_t^\alpha\frac{ G_t^{1-\gamma}}{1-\gamma}+\kappa_2\cdot(1-\psi_t) \frac{ W_t^{1-\gamma}}{1-\gamma}
+u^1_t = E(e_t)\cdot\frac{C_t^{1-\gamma}}{1-\gamma}
 $$
 
-where $\psi_t$ denotes the probability that the agent survives at the end of age $t$, $n_t$ denotes the number of children she has to support at age $t$. The parameter $\gamma$ is the coefficient of relative risk aversion, $\kappa_1$ and $\kappa_2$ denote the relative importance of supporting her children and leaving a bequest, $\alpha$ determines the impact of the number of children to support on the overall utility.
+where $\gamma$ is the coefficient of relative risk aversion. $E(e_t)$ is increasing with $e_t$, implying that health and consumption are complements to each other. We then construct $C_t$ by the Cobb-Douglas product of the quantity of non-housing consumption $c_t$ and of housing consumption $h_t$:
 
-Following @cocco_portfolio_2005 and @yao_optimal_2005, we construct $C_t$ by the Cobb-Douglas product of the quantities of non-housing consumption $c_t$ and housing consumption $h_t$:
-
-$$
+$$\label{eq:consumption}
 C_t = c_t^\rho h_t^{1-\rho}
 $$
 
-where $\rho$ is the optimal proportion of non-housing consumption when the agent makes single-period consumption decisions. Hereafter, we assume the price per unit non-housing consumption and per unit housing consumption at age $t$ is 1 and $v_t$, and $h_t$ also represents house size where the agent lives.
+As is pointed out in @cocco_portfolio_2005 and @yao_optimal_2005, the parameter $\rho$ in equation (\ref{eq:consumption}) can be interpreted as the optimal proportion of non-housing consumption when the agent makes single-period consumption decisions. Hereafter, we assume the price per unit non-housing consumption and per unit housing consumption is 1 and $v_t$, and let $h_t$ also represent the size of house where the agent lives.
 
-Meanwhile, for utility from the agent's spending on children, our setting is in line with @barro_fertility_1989; for bequest utility, we refer to @hubbard_importance_1994 that assumes the agent's life span is risky.
+For the second term in equation (\ref{eq:utility}), we assume the agent's $u^2_t$ is the sum of the utility from her children's consumption and the utility from the assets she has transferred to each child. If the agent has to supports more than one child at a time, we assume each child consumes equally. Let $n_t$ denotes the number of children she has to support at age $t$, $F_t$ be the consumption of each child, $G_{it}$ be the utility she obtained at age $t$ through the assets having transferred to child $i$, we have:
 
-Let $\beta$ be the discounting factor, $V_t$ be the optimal state-value function for the agent. We can then construct the following Bellman equation: $$
+$$
+u^2_t = n_t^\alpha\frac{F_t^{1-\gamma}}{1-\gamma} + \sum^{n_t}_{i=1}G_{it}
+$$
+
+where the first term (left to the plus sign) represents the agent's utility derived from her children's consumption, $\alpha$ determines the impact of the number of children to support on the overall utility. Our setting is in line with @barro_fertility_1989.
+
+For the third term in equation (\ref{eq:utility}), we refer to @hubbard_importance_1994 that assumes the agent's life span is risky. Let $W_t$ be her net wealth at the end of age $t$, $\psi_t$ be the her survival probability at that moment, we have:
+
+$$
+u^3_t = (1-\psi_t) \frac{ W_t^{1-\gamma}}{1-\gamma}
+$$
+
+We assume the longest time she can live is $T$. Thus, when $t=T$, she dies with probability 1, i.e. $\psi_T=0$.
+
+Let $\beta$ be the discounting factor, $V_t$ be the optimal state-value function for the agent. We can construct the following Bellman equation:
+
+$$
 V_t(s) = \max_a \{u_t(a,s) + \beta E_t[V_{t+1}(s)]|\Theta\}
-$$where $a$ and $s$ denote the sets of action and state variables, $\Theta$ denotes the set of parameters in the model.
+$$ where $a$ and $s$ denote the sets of action and state variables, $\Theta$ denotes the set of parameters in the model.
 
-There are three types of financial assets: short-term bond, long-term bond, and equity. The agent can allocate assets across them via two savings accounts: (1) A tax-deferred defined-contribution pension account (referred to as "private pension account" hereafter). Each year prior to retirement, she can choose to deposit up to a certain amount into this account, and after retirement, she withdraws funds from it. (2) Liquid savings account. She can deposit or withdraw money to or from this account at any time. The agent can also invest in housing. We assume she can only rent or own one house at any one time.
+There are three types of financial assets: short-term bond, long-term bond, and equity. The agent can allocate assets across them via two savings accounts: (1) A tax-deferred defined-contribution pension account (referred to as "private pension account" hereafter). She can invest in this account each year prior to retirement, and withdraws funds from it after retirement. (2) Liquid savings account. She can deposit or withdraw money to or from this account at any time. Meanwhile, the agent can invest in housing. We assume she can and can only either rent or own one house at a time.
 
-Throughout the working life, the agent experiences the following six steps each year: (i) earning labor income and asset return; (ii) making mandatory contribution to basic pension fund and housing fund; (iii) making voluntary contribution to private pension account; (iv) paying income tax; (v) making investment decisions, paying for housing and non-housing consumption and for her children's consumption; (vi) dies in probability $1-\psi_t$ at the end of year.
+Throughout the working life, the agent experiences the following six steps each year: (i) earning labor income and asset returns; (ii) making mandatory contribution to social insurances and housing fund; (iii) making voluntary contribution to private pension; (iv) paying income tax; (v) making investment decisions, paying for her own and her children's consumption; (vi) dies at the end of year with probability $1-\psi_t$ . After retirement, the agent's labor incomes are replaced by pension benefits, lump-sum redemption from housing fund, and returns from private pension. Besides, she no longer needs to implement step (ii)-(iv).
 
-After retirement, the agent's labor incomes are replaced by pension benefits, lump-sum redemption from housing fund, and returns from private pension. Meanwhile, she no longer needs to implement step (ii)-(iv), i.e. contribute to basic pension fund, housing fund and private pension, and pay income tax.
+One puzzle about China that has received considerable attention is why its household savings rate rose rapidly from the 1980s to the 2010s and has remained consistently at a high level. This cannot be simply explained by weak social security system, precautionary saving motive, or the increased ratio of working population. [^1] Some influential explanations focus on inter-generational transfer. Curtis, Lugauer, and Mark [-@curtis_demographic_2015; -@curtis_demographics_2017] propose that the one-child policy, starting from 1980 and ending in 2016, led to a decline in family size, thus the Chinese parents can spend less in their children's consumption and have more to save. @du_theory_2013 and @wei_competitive_2011 propose and verify a theory named "competitive saving motive", that is, Chinese parents tend to accumulate and transfer assets for and to their children, in order to increase their children's competitive power on marriage market. To capture these insights, we introduce the spending on children to the agent's objective function. We also assume, at the time that one of her children gets married, she transfers a certain amount of assets to that child.
 
-### 2 Income Process
+[^1]: For an introduction to the Chinese saving puzzle, see @modigliani_chinese_2004.
 
-#### 2.1 Labor Income
+## Income Process
 
-Let $\tilde{Y}_t$ denote the agent's before-tax labor income. Let random variables $z^u_t$, $z^p_t$, $z^q_t$ be the employment status, permanent income shock, and transitory income shock (a transitory shock only affects the agent's current income, while a permanent shock can affect her income in succeeding periods) . The deterministic part of labor income is represented by function $f_y(t,X_t)$, where $X_t$ is the agent's demographic features. Transitory shock $z^q_t$ follows an i.i.d. normal distribution. Permanent shock $z^p_t$ follows a AR(1) process with innovations drawn from a mixture of two normal distributions. Employment status $z^u_t$ can only be 0 (employed) or 1 (unemployed), and $P\{z^u_t=1\}$ denotes the probability of being unemployed. Therefore, the agent's labor income is determined by $$
+### Labor Income
+
+Let $\tilde{Y}_t$ denote the agent's before-tax labor income. Let random variables $z^u_t$, $z^p_t$, $z^q_t$ be the employment status, permanent income shock, and transitory income shock (a transitory shock only affects the agent's current income, while a permanent shock can affect her income in succeeding periods) . The deterministic part of labor income is represented by function $f_y(t,X_t)$, where $X_t$ is the agent's demographic features. Transitory shock $z^q_t$ follows an i.i.d. normal distribution. Permanent shock $z^p_t$ follows a AR(1) process with innovations drawn from a mixture of two normal distributions. Employment status $z^u_t$ can only be 0 (employed) or 1 (unemployed), and $P\{z^u_t=1\}$ denotes the probability of being unemployed. Therefore, the agent's labor income is determined by
+
+```{=tex}
+\begin{equation}
 \begin{split}
 & \tilde{Y}_t = (1-z^u_t)\cdot e^{f_y(t,X_t) + z^p_t + z^q_t} \\
 & z^q_t \sim N(0,\sigma_q^2) \\
@@ -53,13 +94,13 @@ Let $\tilde{Y}_t$ denote the agent's before-tax labor income. Let random variabl
 \right. \\
 & P\{z^u_t=1\} = \frac{1}{1+e^{-f_u(t,z^p_t)}}
 \end{split}
-$$
-
+\end{equation}
+```
 We assume $\mu_{\eta_1}p_\eta + \mu_{\eta_2}(1-p_\eta)=0$, and $\mu_{\eta,1}<0$. For simplicity, we set $$
 f_u(t,z^p_t) = \beta^u_0+\beta^u_1\cdot t+\beta^u_2\cdot z^p_t+\beta^u_3\cdot t\cdot z^p_t
 $$
 
-#### 2.2 Social Security
+### Income Tax and Social Security Contributions
 
 China's social security system consists of five mandatory insurances and a housing fund. During the working life, the agent spends a portion, say $\xi_c$, of her permanent income (which we call "social security contribution base"), contributing to these social security schemes each year. Her employer will make match contributions. The contribution base cannot be more than 3 times the province-wide average wage or less than 0.6 times the province-wide average wage. The contributions are deductible under income tax.
 
@@ -67,7 +108,7 @@ We let $Y^*_t$ be the province-wide average wage; then, the agent's contribution
 Y^B_t=\max\{\min\{\tilde{Y}_t e^{-z^q_t},3Y^*_t\},0.6Y^*_t\}
 $$ For simplicity, we assume $Y^*_t$ is a AR(1) process.
 
-#### 2.3 Pension Benefit
+### Pension Benefit
 
 One of the China's five social insurance schemes is pension insurance. After retirement, the agent receives pension benefit (which is called "basic pension") each year. The amount of benefit is dependent on her previous contributions to pension insurance, and the province-wide average wage.
 
@@ -83,3 +124,28 @@ $$
 \left(\frac{1-(1+i_b)^{-(t_{exp}-t_{ret})}}{1-(1+i_b)^{-1}}\right)\\
 \end{split}
 $$
+
+## Financial Assets
+
+### Asset Markets
+
+### Private Pension
+
+### Liquid Savings
+
+## Housing 
+
+### Homeonwership
+
+### Housing Fund
+
+## Health Expenditure
+
+## Parental Care
+
+## Consumption Budget
+
+# Parametrization
+
+tab
+
