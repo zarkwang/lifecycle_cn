@@ -11,7 +11,7 @@
 
 <meta name="author" content="Zijian (Zark) Wang" />
 
-<meta name="date" content="2023-02-28" />
+<meta name="date" content="2023-03-05" />
 
 <title>Asset Allocation Strategies for Households in China: A Lifecycle Model</title>
 
@@ -353,7 +353,7 @@ display: none;
 <h1 class="title toc-ignore">Asset Allocation Strategies for Households
 in China: A Lifecycle Model</h1>
 <h4 class="author">Zijian (Zark) Wang</h4>
-<h4 class="date">2023-02-28</h4>
+<h4 class="date">2023-03-05</h4>
 
 </div>
 
@@ -364,16 +364,15 @@ in China: A Lifecycle Model</h1>
 V_t = u_t + \delta E_t[V_{t+1}]
 \]</span> where the instantaneous utility <span class="math inline">\(u_t\)</span> is decided by a CRRA-style function:
 <span class="math display">\[
-u_t = \frac{F_t^{1-\gamma_1}}{1-\gamma_1}+\psi_t\cdot \frac{\kappa
-W_t^{1-\gamma_2}}{1-\gamma_2}
+u_t =
+\frac{F_t^{1-\gamma}}{1-\gamma}+(1-\psi_t)\kappa\frac{W_t^{1-\gamma}}{1-\gamma}
 \]</span></p>
-<p>The parameter <span class="math inline">\(\delta\)</span> is
-discounting factor, <span class="math inline">\(\gamma_1\)</span> and
-<span class="math inline">\(\gamma_2\)</span> are risk aversion
-parameters, <span class="math inline">\(\kappa\)</span> captures bequest
-motive. <span class="math inline">\(\psi_t\)</span> denotes the
-mortality rate at age <span class="math inline">\(t\)</span> for the
-subpopulation to which the agent belongs, <span class="math inline">\(W_t\)</span> is the agent’s net wealth, <span class="math inline">\(M_t\)</span> is a state variable jointly
+<p>where <span class="math inline">\(\delta\)</span> is the discounting
+factor, <span class="math inline">\(\gamma\)</span> is the coefficient
+of relative risk aversion, <span class="math inline">\(\kappa\)</span>
+captures bequest motive, <span class="math inline">\(\psi_t\)</span>
+denotes the probability that the agent can survive at the end of age
+<span class="math inline">\(t\)</span>, <span class="math inline">\(W_t\)</span> is the agent’s net wealth, <span class="math inline">\(F_t\)</span> is a state variable jointly
 determined by the agent’s consumption, house size, and distance to a
 savings goal.</p>
 <p>There are three types of financial assets: short-term bond, long-term

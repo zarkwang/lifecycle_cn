@@ -14,10 +14,10 @@ V_t = u_t + \delta E_t[V_{t+1}]
 $$
 where the instantaneous utility $u_t$ is decided by a CRRA-style function:
 $$
-u_t = \frac{F_t^{1-\gamma_1}}{1-\gamma_1}+\psi_t\cdot \frac{\kappa W_t^{1-\gamma_2}}{1-\gamma_2}
+u_t = \frac{F_t^{1-\gamma}}{1-\gamma}+(1-\psi_t)\kappa\frac{W_t^{1-\gamma}}{1-\gamma}
 $$
 
-The parameter $\delta$ is discounting factor, $\gamma_1$ and $\gamma_2$ are risk aversion parameters, $\kappa$ captures bequest motive. $\psi_t$ denotes the mortality rate at age $t$ for the subpopulation to which the agent belongs, $W_t$ is the agent's net wealth, $M_t$ is a state variable jointly determined by the agent's consumption, house size, and distance to a savings goal. 
+where $\delta$ is the discounting factor, $\gamma$ is the coefficient of relative risk aversion, $\kappa$ captures bequest motive, $\psi_t$ denotes the probability that the agent can survive at the end of age $t$, $W_t$ is the agent's net wealth, $F_t$ is a state variable jointly determined by the agent's consumption, house size, and distance to a savings goal. 
 
 There are three types of financial assets: short-term bond, long-term bond, and equity. The agent can allocate assets across these asset types via three savings accounts: (1) A tax-deferred defined-contribution pension account (referred to as "private pension account" hereafter). Each year prior to retirement, she can choose to deposit up to a certain amount into this account, and after retirement, she withdraws funds from it. (2) Liquid savings account. She can deposit or withdraw money to or from this account at any time. (3) Goal-based savings account, tied to a pre-defined savings goal. She continuously invests in this account until reaching the specific savings goal. Once the goal is reached, she will withdraw and consume all the funds in a lump sum, and will not invest any more into the account. As the utility she obtains from operating on this account is subject to whether the specific goal is reached, in our setting, we do not include this utility in her consumption. 
 
