@@ -44,10 +44,10 @@ $$
 
 As is pointed out in @cocco_portfolio_2005 and @yao_optimal_2005, the parameter $\rho$ in equation \eqref{eq:consumption} can be interpreted as the optimal proportion of non-housing consumption when the agent makes single-period consumption decisions. Hereafter, we assume the price per unit non-housing consumption and per unit housing consumption is 1 and $v_t$, and let $h_t$ also represent the size of house where the agent lives.
 
-For the second term in equation \eqref{eq:utility}, we assume the agent's $u^2_t$ is the sum of the utility from her children's consumption and the utility from the assets she has transferred to each child. If the agent has to supports more than one child at a time, we assume each child consumes equally. Let $n_t$ be the number of children she has to support at age $t$, $F_t$ be the consumption of each child, $G_{it}$ be the utility she obtained at age $t$ through the assets having transferred to child $i$, we have:
+For the second term in equation \eqref{eq:utility}, we assume the agent's $u^2_t$ is the sum of the utility from her children's consumption and the utility from the assets she has transferred to each child. If the agent has to supports more than one child at a time, we assume each child consumes equally. Let $n_t$ be the number of children she has to support at age $t$, $F_t$ be the consumption of each child, $G_t$ be the utility she obtained at age $t$ through the assets having transferred to children, we have:
 
 $$
-u^2_t = n_t^\alpha\frac{F_t^{1-\gamma}}{1-\gamma} + \sum^{n_t}_{i=1}G_{it}
+u^2_t = n_t^\alpha\frac{F_t^{1-\gamma}}{1-\gamma} + G_t
 $$
 
 where the first term (left to the plus sign) represents the agent's utility derived from her children's consumption, $\alpha$ determines the impact of the number of children to support on the overall utility. Our setting is in line with @barro_fertility_1989.
@@ -293,9 +293,11 @@ D^H_{t+1} = \left\{
 \right.
 $$ where $0 \leq K^R_{t+1} \leq K_{t+1}$, $\phi_h$ denotes the ratio of housing fund loan limit to the agent's housing fund account balance in the previous year, $\bar{D}_{H}$ denotes the maximum limit of housing fund loan.
 
-## Supplimentary Health Insurance
+## Supplementary Health Insurance
 
 ## Asset Transfer to Children
+
+For the baseline model, we can temporarily assume $G_t=0$.
 
 ## Consumption Budget
 
@@ -314,6 +316,8 @@ table
 | $\alpha$        | concavity for the impact of the number of children on utility    |  0.76   | @curtis_demographic_2015   |
 | $\beta$         | discounting factor                                               |  0.99   | @calvet_cross-section_2021 |
 | $\gamma$        | relative risk aversion                                           |  5.24   | @calvet_cross-section_2021 |
+| $\kappa_1$      |                                                                  |         |                            |
+| $\kappa_2$      |                                                                  |         |                            |
 | Asset Market    |                                                                  |         |                            |
 | $i_b$           | annuity rate                                                     |   4%    | Calibration                |
 | $i_c$           | inflation rate                                                   |   2%    | Calibration                |
