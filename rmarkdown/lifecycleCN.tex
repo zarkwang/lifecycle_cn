@@ -1,0 +1,997 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  12pt,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+\usepackage{setspace}
+\usepackage{amsmath}
+\setstretch{1.25}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={A Lifecycle Model for Chinese Urban Households},
+  pdfauthor={Zijian Zark Wang},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{A Lifecycle Model for Chinese Urban Households}
+\author{Zijian Zark Wang}
+\date{June 12, 2023}
+
+\begin{document}
+\maketitle
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+We develop a representative agent model of Chinese urban households'
+consumption and investment choices over the lifecycle. Our model
+framework is similar to other models of this kind based on US
+households, such as Yogo
+(\protect\hyperlink{ref-yogo_portfolio_2016}{2016}) and Duarte et al.
+(\protect\hyperlink{ref-duarte_simple_2021}{2021}). We differ from them
+by considering key features of China's pension and housing system
+compared to the US system.
+
+China's pension system heavily relies on mandatory public pension,
+whereas occupational and private pensions (e.g.~401(k) and IRA) account
+for a large proportion in the US pension system. In China, employers
+that are willing to offer occupational pensions are usually large
+state-owned enterprises (especially those in railway, electricity or
+communication industries) and public sector. Most firms do not have
+enough incentives to offer occupational pensions. In 2021, the net
+mandatory pension replacement rate to labor income is 92\% in China and
+51\% in the US.\footnote{\url{https://www.oecd-ilibrary.org/sites/75fed0dc-en/index.html?itemId=/content/component/75fed0dc-en}}
+Therefore, in our model, we examine how the public pension benefit is
+calculated in detail. Meanwhile, China just launched its private pension
+scheme in 2022. We believe that the size and importance of private
+pension in its pension market will keep growing in the near future. So,
+we also introduce private pension in our model.
+
+Another noticeable part in China's social security system is the housing
+provident fund (hereafter referred to as ``housing fund''). An employee
+and her employer need to jointly contribute a total of no less than 10\%
+of her pre-tax labor income to her housing fund account every month. The
+fund can only be used by her to pay housing expenditure (including rent
+and mortgage repayment), or enable local governments to issue
+low-interest mortgages. We will also examine the role of housing fund in
+household financial decisions.
+
+\hypertarget{model-framework}{%
+\section{Model Framework}\label{model-framework}}
+
+\hypertarget{objective-function}{%
+\subsection{Objective Function}\label{objective-function}}
+
+We set time is discrete and the agent's preferences are time-separable.
+The agent's instantaneous utility at age \(t\), denoted by \(u_t\), is a
+weighted sum of three separate components: the utility from the agent's
+own consumption \(u^1_t\), the utility from the consumption of her
+dependent children \(u^2_t\), and the utility from leaving bequests
+\(u^3_t\). Following Palumbo
+(\protect\hyperlink{ref-palumbo_uncertain_1999}{1999}), we also consider
+health status as a complement to her (and her dependent children)
+consumption. Therefore, we have:\begin{equation}
+u_t = \Psi(e_t)(u^1_t + \kappa_2 u^2_t) + \kappa_3 u^3_t
+\end{equation}
+
+where \(\kappa_2\) and \(\kappa_3\) measure the relative importance of
+supporting children and leaving bequests, \(e_t\) is the agent's health
+status at age \(t\) (greater \(e_t\) for better health status). Keeping
+in line with De Nardi, French, and Jones
+(\protect\hyperlink{ref-de_nardi_why_2010}{2010}), we set
+\(\Psi(e_t)=1- \kappa_1 \cdot e_t\).
+
+In each utility component, we use a CRRA-style utility function. For the
+first component \(u^1_t\), we set: \begin{equation}
+u^1_t = \frac{(c_t^\rho h_t^{1-\rho})^{1-\gamma}}{1-\gamma}
+\end{equation}
+
+where \(c_t\) and \(h_t\) are the agent's non-housing consumption (by
+herself) and housing consumption; we follow Cocco
+(\protect\hyperlink{ref-cocco_portfolio_2005}{2005}) and Yao and Zhang
+(\protect\hyperlink{ref-yao_optimal_2005}{2005}) to use the Cobb-Douglas
+product in this utility component. \(\gamma\) is the coefficient of
+relative risk aversion, \(\rho\) can be interpreted as the optimal
+proportion of non-housing consumption in the agent's own consumption in
+a single-period consumption decision problem. Hereafter, we assume the
+price per unit non-housing consumption and per unit housing consumption
+is 1 and \(v_t\), and let \(h_t\) also represent the size of house where
+the agent lives.
+
+For the second utility component \(u^2_t\), if the agent has to support
+more than one child at the same time, we assume each child consumes
+equally. Let \(n_t\) be the number of children she has to support,
+\(F_t\) be the consumption of each child, then keeping our setting in
+line with Barro and Becker
+(\protect\hyperlink{ref-barro_fertility_1989}{1989}), we have:
+\begin{equation}
+u^2_t = n_t^\alpha\frac{F_t^{1-\gamma}}{1-\gamma}
+\end{equation}
+
+where \(\alpha\) determines the impact of the number of children to
+support on the overall utility.\footnote{One puzzle about China that has
+  received considerable attention is why its household savings rate rose
+  rapidly from the 1980s to the 2000s and has remained consistently at a
+  high level. This cannot be simply explained by the lack of social
+  security or precautionary saving motive. Some influential explanations
+  focus on inter-generation transfer. For example, Curtis, Lugauer, and
+  Mark (\protect\hyperlink{ref-curtis_demographic_2015}{2015},
+  \protect\hyperlink{ref-curtis_demographics_2017}{2017}) propose that
+  the one-child policy, starting from 1980 and ending in 2016, led to a
+  decline in family size, thus the Chinese parents can spend less in
+  their children and have more to save. To capture this insight, we
+  introduce the spending on children to the agent's objective function.}
+
+For the third utility component \(u^3_t\), we refer to Hubbard, Skinner,
+and Zeldes (\protect\hyperlink{ref-hubbard_importance_1994}{1994}) that
+assumes the agent's life span is risky. Let \(W_t\) be her net wealth at
+the end of age \(t\), \(\psi_t\) be the probability that she can survive
+at that moment (given that she is alive in the previous year). we have:
+\begin{equation}
+u^3_t = (1-\psi_t) \frac{ W_t^{1-\gamma}}{1-\gamma}
+\end{equation}
+
+Let \(\beta\) be the agent's subjective discounting factor, \(V_t\) be
+the optimal state-value function for the agent. We can construct the
+following Bellman equation: \begin{equation}
+V_t(s) = \max_a \{u_t(a,s) + \beta E_t[V_{t+1}(s)]|\Theta\}
+\end{equation}
+
+where \(a\) and \(s\) denote action variables and state variables,
+\(\Theta\) denotes the parameters in the model.
+
+There are three types of financial assets: short-term bond, long-term
+bond, and equity. The agent can allocate assets across them via two
+investment accounts: The first is a liquid savings account. She can
+deposit or withdraw money to or from this account at any time. The
+second is a tax-deferred defined-contribution pension account (hereafter
+referred to as ``private pension account''). She can invest in this
+account each year prior to retirement, and withdraws funds from it since
+retirement. Meanwhile, the agent can invest in housing. We assume she
+can and can only either rent or own one house at a time.
+
+Throughout the working life, the agent experiences the following six
+steps each year: (i) earning labor income and asset returns; (ii) making
+mandatory contribution to social insurances and housing fund; (iii)
+making voluntary contribution to private pension; (iv) paying income
+tax; (v) paying for her own and her children's consumption, paying
+supplementary health insurance, and making investment choices. If she
+meets certain conditions (such as having an outstanding mortgage), she
+may receive some tax rebates after step (iv). When she retires, she
+redeems the assets from the housing fund. Since then, the agent's labor
+income will be replaced by pension benefit and she will no longer need
+to implement step (ii)-(iv) or pay supplementary health insurance.
+Instead, she can withdraw money from private pension account, and will
+pay medical expenditure according to her health status. We assume the
+longest time she can live is \(T\), i.e.~\(\psi_T=0\).
+
+\hypertarget{income-process}{%
+\subsection{Income Process}\label{income-process}}
+
+\hypertarget{labor-income}{%
+\subsubsection{Labor Income}\label{labor-income}}
+
+Let \(y_t\) denote the agent's (real) pre-tax labor income.\footnote{Given
+  the agent's nominal pre-tax income \(\tilde{Y}_t\) and price level
+  \(P_t\), we can calculate \(y_t\) by \(y_t = \tilde{Y}_t/P_t\). In
+  estimation, we set \(P_t=1\) in the first year of the panel data, and
+  for the subsequent years, \(P_t\) grows at the observed inflation
+  rate. In simulation, we replace the observed inflation rate by a fixed
+  rate \(i_c\).} Let random variables \(z^u_t\), \(z^p_t\), \(z^q_t\) be
+the employment status, permanent income shock, and transitory income
+shock. The deterministic part of labor income is represented by function
+\(f_y(t,X_t)\), where \(X_t\) is the agent's demographic features (sex
+and education).\footnote{For how to estimation \(f_y(t,X_t)\), see
+  Campbell et al.
+  (\protect\hyperlink{ref-campbell_investing_2001}{2001}) and Cocco,
+  Gomes, and Maenhout
+  (\protect\hyperlink{ref-cocco_consumption_2005}{2005}).} Employment
+status \(z^u_t\) can only be 0 (employed) or 1 (unemployed),
+\(P\{z^u_t=1\}\) denotes the probability of being unemployed. Transitory
+shock \(z^q_t\) follows an i.i.d. normal distribution. We assume
+permanent shock \(z^p_t\) follows a AR(1) process with innovations drawn
+from a mixture of two normal distributions - this allows the
+distribution of income shock to have a negative skewness and high
+kurtosis, as is shown in Guvenen, Ozkan, and Song
+(\protect\hyperlink{ref-guvenen_nature_2014}{2014}) and Guvenen et al.
+(\protect\hyperlink{ref-guvenen_what_2021}{2021}). Therefore, the
+agent's labor income is determined by \begin{equation}\begin{aligned}
+& y_t = (1-z^u_t)\cdot e^{f_y(t,X_t) + z^p_t + z^q_t} \\
+& z^q_t \sim N(0,\sigma_q^2) \\
+& z^p_t = \delta^pz^p_{t-1} + \eta_t \\
+& \eta_t \sim \left\{
+\begin{aligned}
+& N(\mu_{\eta_1},\sigma_{\eta_1}) \; \text{with prob.} \,p_\eta \\
+& N(\mu_{\eta_2},\sigma_{\eta_2}) \; \text{with prob.} \,1-p_\eta\\
+\end{aligned}
+\right. \\
+& P\{z^u_t=1\} = 1/(1+e^{-f_u(t,z^p_t)})
+\end{aligned}
+\end{equation}
+
+where \(\mu_{\eta_1}p_\eta + \mu_{\eta_2}(1-p_\eta)=0\), and
+\(\mu_{\eta,1}<0\).
+
+\hypertarget{pension-benefit}{%
+\subsubsection{\texorpdfstring{Pension Benefit
+\label{benefit}}{Pension Benefit }}\label{pension-benefit}}
+
+China's social security system consists of five social insurances and a
+housing fund. In every month during the working life, the agent and her
+employer make a mandatory contribution to these social security schemes,
+so long as she is employed. This contribution is tax-deductible.
+Normally, the annual contribution made by the agent herself is a fixed
+rate \(\xi_c\) multiplied by a fraction (or all) of her labor income for
+the previous year - the former (\(\xi_c\)) is termed as ``employee
+contribution rate'',\footnote{China's five social insurances are public
+  pension, health insurance, unemployment insurance, maternity
+  insurance, work injury insurance. When calculate the employee
+  contribution rate, we mainly consider basic pension (8\%) and health
+  insurance (2\%), for the contribution rates for other insurances are
+  trivial (\(\leq\) 0.5\%) compared to the two.} the latter is termed as
+``social security contribution base''. We represent the agent's nominal
+income by \(\tilde{Y}_t\), and her contribution base by \(Y^B_t\). If
+she is unemployed in the previous year, that is, she is a new employee
+to the current company, then \(Y^B_t\) will refer to her salary for the
+current year.
+
+Legally, the social security contribution base cannot be less than 0.6
+times the province-wide average wage, or more than 3 times the
+province-wide average wage. Let \(Y^*_t\) be the province-wide average
+wage, we can calculate \(Y^B_t\) via: \begin{equation}
+Y^B_t=\max\{\min\{\xi_b[\tilde{Y}_{t-1}z^u_{t-1}+\tilde{Y}_t(1-z^u_{t-1})],3Y^*_t\},0.6Y^*_t\}\times z^u_t
+\end{equation}
+
+where \(\xi_b\) is a parameter between 0 and 1. When the agent is
+unemployed at age \(t\), we set \(Y^B_t=0\). For simplicity, we assume
+\(Y^*_t\) is a AR(1) process.
+
+In China's social security schemes, the public pension scheme, which is
+also termed as ``basic pension'', accounts for the largest portion of
+the contribution. Normally, an employee contributes 8\% of her
+contribution base to the basic pension every month. Her employer makes a
+match contribute equal to 16\% of her contribution base to the basic
+pension.\footnote{Before 2019, the employer's contribution rate to basic
+  pension is 20\%.} Since retirement, the agent receives pension benefit
+\(B_t\) each year, which replaces her labor income. This benefit is
+constituted by two parts: the first part, which we term as \(B^1_t\),
+comes from a scheme called ``fundamental pension''; the second part,
+which we term \(B^2_t\), comes from the agent's ``individual account
+pension''. The amount of fundamental pension benefit is dependent on the
+agent's previous contribution bases as well as province-wide average
+wage, whereas individual account pension benefit is dependent on the
+balance of her basic pension account.\footnote{Readers interested in
+  China's pension system can find useful information in Fang and Feng
+  (\protect\hyperlink{ref-fang_chinese_2020}{2020}), but please note
+  this reference does not include any pension reform after 2019.}
+
+To calculate pension benefit, we suppose the agent starts working at age
+\(t_0\), retires at \(t_{ret}\). The employee contribution rate to basic
+pension is \(\xi_m\) (\(\xi_m<\xi_c\)), the employer's match
+contribution rate is \(\xi_n\), the annuity rate for basic pension fund
+is \(i_b\), the life expectancy in China is \(t_{exp}\), the balance of
+the agent's basic pension account is \(A^B_t\), where \(A^B_{t_0}=0\).
+According to the official calculation rules, we define \(B_t\) by
+\begin{equation}
+\label{eq:pension}
+\begin{aligned}
+& B^1_t = \frac{1}{2}\left[\sum_{\tau=t_0}^{t_{ret}-1}\left(\frac{Y^B_\tau}{Y^*_\tau}\right) + \sum_{\tau=t_0}^{t_{ret}-1}z^u_{\tau}\right]\times Y^*_t\times1\% \\
+& A^B_{t_{ret}}=\sum_{\tau=t_0}^{t_{ret}-1}
+\left( A^B_\tau\cdot (1+i_b)+Y^B_\tau \cdot \xi_m\right) \\
+& B^2_t =A^B_{t_{ret}} / 
+\left(\frac{1-(1+i_b)^{-(t_{exp}-t_{ret})}}{1-(1+i_b)^{-1}}\right) \\
+& B_t = B^1_t + B^2_t
+\end{aligned}
+\end{equation}
+
+We explain equation (\ref{eq:pension}) briefly. \(B^1_t\) equals to the
+average of the agent's indexed average wage and province-wide average
+wage, multiplied by the number of years in which she makes a
+contribution, then by 1\%. The agent's indexed average wage refers to
+the average ratio of her contribution base to province-wide average wage
+across the working life. After simplification, we obtain the first line
+of equation (\ref{eq:pension}). For the second line, \(A^B_{t_{ret}}\)
+is the balance of the agent's individual pension account at retirement.
+For the third line, we choose \(B^2_t\) to make the annual withdrawal
+from the individual pension account remain constant from the retirement
+age \(t_{ret}\) to the expected lifespan \(t_{exp}\). Finally, we sum up
+fundamental pension and individual account pension benefit, then obtain
+\(B_t\).
+
+\hypertarget{financial-assets}{%
+\subsection{Financial Assets}\label{financial-assets}}
+
+\hypertarget{asset-markets}{%
+\subsubsection{Asset Markets}\label{asset-markets}}
+
+We assume the short-term bond return rate equals to a fixed risk-free
+rate, \(i_f\). For the other assets, we assume their return rates follow
+a log-normal distribution. Let \(\tilde{R}_{j,t}\) be the return of
+asset type \(j\), we set \(r^j_t=\ln(\tilde{R}_{j,t})\), where
+\(j\in\{l,e,h,m\}\): \(r^l_t\) denotes log long-term bond interest rate,
+\(r^e_t\) denotes log equity return rate, \(r^h_t\) denote log housing
+price growth rate, \(r^m_t\) denote log commercial mortgage rate. We use
+a VAR(1) model to simulate the fluctuation of each \(r^j_t\):
+\begin{equation} 
+\textbf{r}_t = \delta^r_0+\delta^r_1* \textbf{r}_{t-1}+\epsilon_t
+\end{equation}
+
+where \(\textbf{r}_t =[r^l_t,r^e_t,r^h_t,r^m_t]'\) is a four-dimension
+vector, \(\epsilon_t\) follows a normal distribution with a mean of
+0.\footnote{One way to construct Chinese housing price indices is to
+  divide Chinese urban area to Tier-1, Tier-2, Tier-3 and Tier-4 cities,
+  then constructing housing price index for each tier. See Fang et al.
+  (\protect\hyperlink{ref-fang_demystifying_2016}{2016}) for details.}
+
+\hypertarget{investment-decisions}{%
+\subsubsection{Investment Decisions}\label{investment-decisions}}
+
+The agent has two investment accounts: a liquid savings account, and a
+private pension account. We use \(A^L_t\) and \(A^P_t\) to represent the
+balance of each account at the end of age \(t\), \(S^L_{j,t}\) and
+\(S^P_{j,t}\) to represent the net flow into asset type \(j\) in each
+account.
+
+The balance of liquid savings account is determined by \begin{equation}
+A^L_{t+1} = \sum_{j\in J} (\tilde{R}_{j,t+1}A^L_{j,t}+S^L_{j,t+1}) 
+\end{equation}
+
+where \(A^L_{t+1} \geq -\xi_a\tilde{Y}\), \(\xi_a\) denotes the ratio of
+overdraft limit to labor income. The total saving in this account is
+\(S^L_t = \sum_{j \in J} S^L_{j,t}\). We assume the agent can borrow
+some short-term bonds, but cannot short on long-term bond and equity.
+Therefore, \(A^L_{j,t}\geq0\) for any \(j\in\{l,e\}\).
+
+Chinese authority started implementing private pension scheme in 2022.
+It is notable that private pension differs from ``individual account
+pension'' we mentioned in subsection \ref{benefit} in three significant
+ways: First, individual account pension belongs to basic pension, which
+is mandatory, whereas the participation in private pension scheme is
+voluntary. Second, the so-called ``individual account'' is managed by
+National Council for Social Security Fund, so people have no control
+over how the assets are allocated in their individual accounts. By
+contrast they can decide how much to invest and how to allocate the
+funds in their private pension accounts. Third, basic pension benefit is
+tax-free, while any withdrawal from the private pension account is taxed
+at 3\%, i.e.~the lowest rate of individual income tax.
+
+The balance of private pension account is determined by \begin{equation}
+A^P_{t+1} = \sum_{j\in J} (\tilde{R}_{j,t}A^P_{j,t}+S^P_{j,t+1}) 
+\end{equation}
+
+Each year, net flow into the private pension account cannot exceed a
+certain limit. Hence, we set
+\(S^P_{t+1}\equiv \sum_{j\in J} S^P_{j,t+1} \leq S_{\max}\), where
+\(S_{\max}\) is the private pension saving limit. For all \(j \in J\),
+\(A^P_{j,t} \geq 0\). The domain for \(S^P_t\) is \([0,\infty)\) when
+\(t<t_{ret}\) and is \((-\infty,0]\) when \(t\geq t_{ret}\). A negative
+\(S^P_t\) implies the agent withdrawing money from the account at age
+\(t\).
+
+\hypertarget{housing}{%
+\subsection{Housing}\label{housing}}
+
+\hypertarget{homeownership}{%
+\subsubsection{Homeownership}\label{homeownership}}
+
+Our settings about housing are similar to Cocco
+(\protect\hyperlink{ref-cocco_portfolio_2005}{2005}) and Yao and Zhang
+(\protect\hyperlink{ref-yao_optimal_2005}{2005}). The main difference is
+that when the agent borrows mortgage, in our model, she can borrow both
+a commercial loan from bank, and a housing fund loan from a
+government-run institute. This setting is based on China's housing
+provident fund system, a social security scheme that began to be
+implemented in 1999. Chinese authority referred to Singapore's Central
+Provident Fund when designing the system. According to this system, an
+employee is required to contribute a certain portion of her pre-tax
+labor income to a housing fund account every month. This contribution is
+normally 5\%-12\% of her social security contribution base. Her employer
+is also required to contribute an equal amount. These funds are managed
+by Housing Provident Fund Management Center run by each local authority,
+and can only be used for purchasing, decorating, repairing or renting
+houses. Individuals who have contributed to the housing fund can apply
+for a subsidized loan (under a certain limit) from the management center
+on their first or second home purchase. When the employee retires and
+has already repaid the loan, she can redeem the remaining funds from her
+housing fund account.
+
+Let \(v_t\) be housing price, \(o_t\) be the agent's homeonwership
+choice, \(K_t\) be her housing expenditure (including renting and
+buying). The rent-to-price ratio is \(\phi_{rp}\), the transaction cost
+for home buying is \(\phi_{buy}\) of the house value. We set
+\(v_{t+1}=R^h_tv_t\). If the agent is a homeowner at age \(t\), then
+\(o_t = 1\); otherwise, \(o_t = 0\). Negative \(K_t\) implies a selling
+of home. If the agent borrows a mortgage, the loan-to-value ratio she
+faces is \(\phi_{lv}\) and the mortgage term is \(m\). As we mentioned,
+\(h_t\) denotes the quantity of housing service she consumes at age
+\(t\). We assume the agent either rents or owns only one home at a
+time.\footnote{This setting is plausible because of the restrictive home
+  purchase policies in many Chinese cities. Normally, individuals face
+  higher downpayments and higher mortgage rates for their second and
+  third home purchase. Third-time home buyers cannot apply for housing
+  fund loans. In Tier-1 and Tier-2 cities, the eligibility to purchase
+  newly-built housing is usually determined by a lottery system. People
+  not owning a house have a higher chance of winning the lottery.} For
+simplicity, we do not consider either the cost of moving and maintaining
+home or home value deprecation, and we assume the agent keeps living in
+her own home until selling it.
+
+When the agent keeps to be a pure renter at \(t+1\), we set
+\begin{equation}
+K_{t+1}\{o_t = 0,o_{t+1} = 0\} = 
+\phi_{rp} v_{t+1}h_{t+1}
+\end{equation}
+
+When the agent buys a home at \(t+1\), i.e.~becoming a homeowner,
+\begin{equation}
+\begin{aligned}
+& K_{t+1}\{o_t = 0,o_{t+1} = 1\} \leq (1+\phi_{buy})v_{t+1}h_{t+1}\\
+& K_{t+1}\{o_t = 0,o_{t+1} = 1\} \geq (1-\phi_{lv}+\phi_{buy})v_{t+1}h_{t+1}
+\end{aligned}
+\end{equation}
+
+The agent's mortgage debt consists of both commercial loan and housing
+fund loan. Let \(D_t\) be the agent's mortgage debt (\(D_t\geq0\)),
+\(D^H_t\) denote the agent's outstanding housing fund loan
+(\(0\leq D^H_t\leq D_t\)) . The interest rate for housing fund loan is
+\(i_d\) lower than the commercial mortgage rate \(\tilde{R}_{m,t}\). If
+she borrows at \(t+1\), she has to repay the debt in each subsequent
+year. \begin{equation}\label{eq:CL}
+D_{t+1} = \left\{
+\begin{aligned}
+& v_{t+1}h_{t+1}-K_{t+1}, & \; \text{if} \; o_t = 0,o_{t+1} = 1 \\
+& (\tilde{R}_{m,t}-i_d)D^H_t + \tilde{R}_{m,t}(D_t-D^H_t) - K_{t+1}, & \; \text{if} \;o_t=1,o_{t+1}=1, D_t>0 \\
+& 0, & \; \text{else}
+\end{aligned}\right.
+\end{equation}
+
+Before paying off the mortgage, i.e.~\(D_t>0\), the agent is not allowed
+to change or sell the home, or borrow a new mortgage. Under this
+circumstance, the domain for \(o_{t+1}\) is \(\{1\}\) and the domain for
+\(h_{t+1}\) is \(\{h_t\}\) (otherwise they will be \(\{0,1\}\) and
+\([0,\infty)\)).
+
+In each installment, the repayment she made should be no less than a
+minimum limit. Therefore, \begin{equation}
+\begin{aligned}
+& K_{t+1}\{o_t=1,o_{t+1}=1,D_t>0\} \geq \Phi^{HFL}_{t+1} D^H_t + \Phi^{CL}_{t+1}(D_t - D^H_t) \\
+& K_{t+1}\{o_t=1,o_{t+1}=1,D_t>0\} \leq D_t \\
+& K_{t+1}\{o_t=1,o_{t+1}=1,D_t=0\} = 0
+\end{aligned}
+\end{equation}
+
+where \(\Phi^k_t\) (\(k\in\{CL,HFL\}\)) denotes the ratio of minimum
+repayment to debt for each loan type (\(CL\) denotes commercial loan,
+\(HFL\) denotes housing fund loan). We set that, for the remaining
+mortgage term, if she repays equal amount each year , then this amount
+is the minimum repayment. Therefore, \begin{equation}
+\Phi^k_t = {i_{k,t}}^{-1}/\left(\frac{1-{i_{k,t}}^{-(m^k_t+1)}}{1-{i_{k,t}}^{-1}}\right)
+\end{equation}
+
+where \(k\in\{CL,HFL\}\), \(i_{CL,t} = \tilde{R}_{m,t}\),
+\(i_{HFL,t} = \tilde{R}_{m,t} - i_b\). \(m^k_t\) denotes the length of
+remaining mortgage term for loan type \(k\), and \begin{equation}
+\begin{aligned}
+& m^{CL}_{t+1} = \left\{
+\begin{aligned}
+& m, & \; \text{if} \; o_t = 0,o_{t+1} = 1 \\
+& m^{CL}_t - 1, & \; \text{if} \;o_t=1, o_{t+1}=1, D_t-D^H_t>0 \\
+& 0, & \; \text{else}
+\end{aligned}\right. \\
+& m^{HFL}_{t+1} = \left\{
+\begin{aligned}
+& \min\{m,t_{ret}-t\}, & \; \text{if} \; o_t = 0,o_{t+1} = 1 \\
+& m^{HFL}_t - 1, & \; \text{if} \;o_t=1, o_{t+1}=1, D^H_t>0 \\
+& 0, & \; \text{else}
+\end{aligned}\right.
+\end{aligned}
+\end{equation}
+
+where the maximum mortgage term is \(\min\{m,t_{ret}-t\}\), implying
+that the housing fund loan should be paid off before retirement.
+
+When the agent sells a house at \(t+1\), \begin{equation}
+K_{t+1}\{o_t=1,o_{t+1}=0\} = -v_{t+1}h_{t+1}
+\end{equation}
+
+\hypertarget{housing-fund}{%
+\subsubsection{Housing Fund}\label{housing-fund}}
+
+During the working life, the agent's annual contribution to the housing
+fund account is a fixed rate \(\xi_h\) (\(\xi_h<\xi_c\)) multiplied by
+her contribution base. Her employer's match contribution is at the same
+amount. The funds in housing fund account grow at risk-free rate. At
+retirement, the agent redeems the remaining funds from the account. Let
+\(A^H_t\) denote the balance of housing fund account, \(S^H_t\) denote
+the money withdrawn from the account, \(K^H_t\) denote the repayment for
+housing fund loan, then before retirement,
+\begin{equation}\label{eq:HFbalance}
+A^H_{t+1}= \left\{
+\begin{aligned}
+& (1+i_f)A^H_t+2\xi_h Y^B_{t+1} - S^H_{t+1}, & \text{if} \; t+1<t_{ret}\\
+& 0, & \text{if} \; t+1 \geq t_{ret}\\
+\end{aligned}
+\right.
+\end{equation}
+
+where \(0\leq S^H_{t+1}\leq K_{t+1}\), \(A^H_{t+1}\geq 0\).
+
+The agent's debt on housing fund loan is \begin{equation}\label{eq:HFL}
+D^H_{t+1} = \left\{
+\begin{aligned}
+& \min\{\phi_h A^H_t,\bar{D}_{H},D_{t+1}\},& \text{if} \;o_t=0,o_{t+1}=1\\
+& (\tilde{R}_{m,t}-i_d)D^H_t - K^H_{t+1},& \text{if} \;o_t=1,o_{t+1}=1,D^H_t>0\\
+& 0,& \text{else}
+\end{aligned}
+\right.
+\end{equation}
+
+where \(0\leq K^H_{t+1}\leq K_{t+1}\), \(\phi_h\) denotes the ratio of
+housing fund loan the agent's can borrow to her housing fund account
+balance in the previous year, \(\bar{D}_{H}\) denotes the ceiling of
+housing fund loan. When the agent is a pure renter, i.e.~\(o_{t+1}=0\),
+she can also use housing fund to pay her rent. In this case,
+\(K^H_{t+1}=0\), \(0 \leq S^H_{t+1} \leq \phi_{rp} v_{t+1}h_{t+1}\).
+
+When solving our model, we assume the agent's homeownership \(o_t\),
+house size \(h_t\), housing expenditure \(K_t\), withdrawl from the
+housing fund account \(S^H_t\), and housing fund loan repayment
+\(K^H_t\) are her action variables. She control these variables and use
+equation (\ref{eq:CL})(\ref{eq:HFbalance})(\ref{eq:HFL}) to decide the
+total mortgage debt \(D_t\), housing fund loan debt \(D^H_t\), and the
+balance of housing fund account \(A^H_t\). Moreover, the range of
+\(K_t\) is constrained by \(o_t\) and \(h_t\), and the ranges of
+\(K^H_t\) and \(S^H_t\) are constrained by \(K_t\).
+
+\hypertarget{supplementary-health-insurance}{%
+\subsection{Supplementary Health
+Insurance}\label{supplementary-health-insurance}}
+
+Like Duarte et al. (\protect\hyperlink{ref-duarte_simple_2021}{2021}),
+we consider the agent's working life and retirement life separately.
+Throughout the working life, the agent keeps at the good health status
+and does not need to pay medical expenditure. Since retirement, her
+health status shifts between several values randomly and she spends in
+medical care each year, according to her age, health status, and income.
+
+Following Koijen, Van Nieuwerburgh, and Yogo
+(\protect\hyperlink{ref-koijen_health_2016}{2016}), we assume the
+agent's health status \(e_t\) is one of \(\{0,\underline{e},1\}\), where
+\(e_t=0\) indicates death, \(e_t=\underline{e}\) indicates bad status,
+\(e_t =1\) indicates good status (\(0<\underline{e}<1\)). Before
+retirement, we set \(e_t=1\). Since retirement, we denote the transition
+probability between the health status by \(P\{e_{t+1}|e_t\}\) and set
+\(e_t=0\) (death) as an absorbing status. Thus, \(P\{0|0\}=1\), the
+agent's survival probability at the end of \(t+1\) conditional on
+\(e_t\) is: \begin{equation}
+\psi_{t+1}|e_t = 1-P\{0|e_t\}
+\end{equation}
+
+Let \(M_t\) denote the agent's out-of-pocket medical expenditure at age
+\(t\). Before retirement and at the time of death, \(M_t=0\). The
+deterministic part of log medical expenditure is given by
+\(f_m(t,y_t,e_t)\). Following French and Jones
+(\protect\hyperlink{ref-french_distribution_2004}{2004}) and De Nardi,
+French, and Jones (\protect\hyperlink{ref-de_nardi_why_2010}{2010}), we
+have: \begin{equation}
+\begin{aligned}
+& \ln(M_t)=f_m(t,y_t,e_t)+\zeta^p_t + \zeta^q_t \\
+& \zeta^p_t = \delta^{\zeta}\zeta^p_{t-1}+\omega_t \\
+& \omega_t \sim N(0,\sigma_{\omega})\\
+& \zeta^q_t \sim N(0,\sigma_{\zeta})
+\end{aligned}
+\end{equation}
+
+where \(\zeta^p_t\) is the permanent shock to medical expenditure,
+\(\zeta^q_t\) is the transitory shock to medical expenditure.
+\(\zeta^p_t\) follows a AR(1) process with a normally-distributed
+innovation, \(\zeta^q_t\) follows a normal distribution.
+
+Our setting about supplementary health insurance is similar to Koijen,
+Van Nieuwerburgh, and Yogo
+(\protect\hyperlink{ref-koijen_health_2016}{2016}). The agent can buy
+insurances at different ages during her working life (from \(t_0\) to
+\(t_{ret}-1\)), and these insurances remains valid until her death. The
+compensation of each supplementary health insurance can cover the
+difference in medical expenditure between good bad health status, and
+the insurance company makes zero profit. Let \(I_t\) denote the price of
+insurance that the agent buys at age \(t\). Then, \begin{equation}
+\begin{aligned}
+& I_t=\sum_{\tau=t_{ret}}^T \frac{\psi^e_\tau\cdot E[\Delta M_\tau]}{(1+i_f)^{\tau-t}} \\
+& \Delta M_\tau = (f_m(\tau,y_\tau,\underline{e}) - f_m(t,y_\tau,1)) \cdot e^{\zeta^p_\tau + \zeta^q_\tau}\\
+& \psi^e_\tau = P\{e_\tau = \underline{e}\}
+\end{aligned}
+\end{equation}
+
+where \(\psi^e_\tau\) is the unconditional probability of
+\(e_\tau=\underline{e}\), \(\Delta M_\tau\) is the medical expenditure
+under bad health status minus that under good health at age \(\tau\). We
+normalize the amount of insurance the agent purchases at age \(t\) to
+\(g_t\), where \(g_t \in [0,1]\) and
+\(\sum_{t=t_0}^{t_{ret}}{g_t}\leq 1\). Therefore, the premium that she
+pays at age \(t\) is \(g_t \cdot I_t\).
+
+\hypertarget{budget-constraints}{%
+\subsection{Budget Constraints}\label{budget-constraints}}
+
+The agent's income tax \(L(Y^{tax}_t)\) is a function to of the taxable
+income \(Y^{Tax}_t\). In China, taxable income is the agent's nominal
+income minus social security contribution and special additional
+deductions, then minus tax-exempt income threshold. As is mentioned
+above, the agent's social security contribution is \(\xi_cY^B_t\). Three
+elements in our model can be counted as special additional deductions:
+private pension savings, spending on each child, housing expenditure.
+Expenses in these fields can be deducted from pre-tax income before tax
+is calculated.
+
+The special additional deduction has two modes: one is to deduct a fixed
+amount \(\Gamma\) from pre-tax income, the other is to deduct actual
+expenses. The deduction for every child supported by the agent, housing
+rent, and mortgage repayment applies for the former. Private pension
+savings and medical expenditure applies to the latter. Let
+\(\underline{Y}\) denote the tax-exempt income threshold. We can
+calculate the agent's taxable income by \begin{equation}
+Y^{Tax}_t = \max\{0,\tilde{Y_t} - \xi_cY^B_t  - \Gamma(n_t+\textbf{1}\{o_t=0\}+\textbf{1}\{o_t=1,D_t>0\}) - S^P_t -\underline{Y}\}
+\end{equation}
+
+China's income tax system was reformed in 2008, 2011 and 2018. To
+approximate the statutory tax progressivity, we follow Heathcote,
+Storesletten, and Violante
+(\protect\hyperlink{ref-heathcote_optimal_2017}{2017}) to define the
+income tax function by: \begin{equation} 
+L(Y^{Tax}_t)=Y^{Tax}_t - \delta^l_0 (Y^{Tax}_t)^{\delta^l_1}
+\end{equation}
+
+where \(\delta^l_0\) determines the average taxation level of the
+economy, \(\delta^l_1\) determines the elasticity of post-tax to pre-tax
+income.
+
+The agent's net wealth is the sum of her basic pension account balance,
+private pension account balance, liquid savings account balance, housing
+fund account balance, housing value minus mortgage debt (if she is a
+homeowner): \begin{equation}
+W_t = A^B_t+A^P_t+A^L_t+A^H_t+o_t v_{t}h_t-D_t
+\end{equation}
+
+Before retirement, the agent's non-housing consumption is her labor
+income minus social security contribution, total spending on her
+children, income tax, housing expenditure that is not paid by
+withdrawals from housing fund account, private pension and liquid
+savings, and supplementary health insurance premium. To include
+government transfer to low-income households in our model, we set a
+non-housing consumption floor, \(\underline{c}\). Hence,
+\begin{equation}
+c_t = \max\{\tilde{Y}_t - \xi_cY^B_t - n_t F_t - L(Y^{Tax}_t)  - (K_t - S^H_t) - (S^L_t+S^P_t) - g_tI_t ,\underline{c}\}
+\end{equation}
+
+Since retirement, the agent's non-housing consumption is her pension
+benefit and the lump-sum redemption from housing fund, and withdrawals
+from private pension account, minus liquid savings, total spending on
+her children, housing expenditure, medical expenditure that is uncovered
+by health insurance. Also, we consider a consumption floor:
+\begin{equation}
+c_t = \max\{B_t + A^H_t \textbf{1}\{t=t_{ret}\} -(1-\xi_p)S^P_t - S^L_t - n_tF_t - K_t - (1-\sum_{t=t_0}^{t_{ret}}g_t)M_t,\underline{c}\}
+\end{equation}
+
+where \(\xi_p\) is the tax rate for withdrawals from private pension
+account.
+
+In summary, the agent's action variables are
+\(a =\{F_t, h_t, o_t, g_t, K_t, K^H_t, S^H_t, S^P_{j,t}, S^L_{j,t}, \phi_e\}\),
+the state variables are
+\(s=\{e_t,c_t,M_t,\tilde{Y_t},Y^B_t,B_t,A^B_t,A^L_t,A^P_t,A^H_t,D_t,D^H_t,W_t\}\),
+where \(j \in \{l,e\}\).
+
+\hypertarget{parametrization}{%
+\section{Parametrization}\label{parametrization}}
+
+We estimate the parameters in income process and tax function using
+longitudinal household survey data (e.g.~CFPS, CHFS). The number of
+dependent children \(n_t\) is also estimated on the same dataset.
+
+Health status transition probabilities and medical expenditure are
+estimated using China Health and Retirement Longitudinal Study (CHARLS)
+data.
+
+For long-term bond return, we can refer to 30Y Government Bond and 30Y
+Financial Bond of Commercial Bank (AAA). For equity, we can use CSI 300
+or a capitalization-weighted index for all stocks listed on Shanghai
+Stock Exchange and Shenzhen Stock Exchange. For housing price, we can
+refer to the sales prices of residential buildings in 70 medium and
+large-sized cities, reported by National Bureau of Statistics of China.
+
+Preference-related parameters, esp.~the impact of children number on
+overall utility \(\kappa_2\) and bequest motive \(\kappa_3\), are better
+estimated with method of simulated moment after we solve the model.
+
+The other parameters are listed in the following table:
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2432}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2703}}
+  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2432}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2432}}@{}}
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+Parameter
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Description
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Value
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Source
+\end{minipage} \\
+\midrule()
+\endhead
+\textbf{Age} & & & \\
+\(t_0\) & age of start working & 20 & Calibration \\
+\(t_{ret}\) & age of retirement & 60 & Calibration \\
+\(t_{exp}\) & life expectancy & 75 & Calibration \\
+\(T\) & maximum lifespan & 99 & Calibration \\
+\textbf{Preferences} & & & \\
+\(\alpha\) & concavity for the impact of the number of children on
+utility & 0.76 & Curtis, Lugauer, and Mark
+(\protect\hyperlink{ref-curtis_demographic_2015}{2015}) \\
+\(\beta\) & discounting factor & 0.99 & Calvet et al.
+(\protect\hyperlink{ref-calvet_cross-section_2021}{2021}) \\
+\(\gamma\) & relative risk aversion & 5.24 & Calvet et al.
+(\protect\hyperlink{ref-calvet_cross-section_2021}{2021}) \\
+\(\underline{e}\) & bad health status & 0.74 & Koijen, Van Nieuwerburgh,
+and Yogo (\protect\hyperlink{ref-koijen_health_2016}{2016}) \\
+\(\kappa_1\) & the impact of health status on overall utility & 0.3 & De
+Nardi, French, and Jones
+(\protect\hyperlink{ref-de_nardi_why_2010}{2010}) \\
+\textbf{Asset Markets} & & & \\
+\(i_b\) & annuity rate & 4\% & Calibration \\
+\(i_c\) & inflation rate & 2\% & Calibration \\
+\(i_d\) & spread between commercial mortgage and housing fund loan & 2\%
+& Calibration \\
+\(i_f\) & risk-free rate & 2\% & Calibration \\
+\textbf{Social Security} & & & \\
+\(\xi_b\) & ratio of contribution base to labor income & 100\% &
+Calibration \\
+\(\xi_c\) & employee contribution rate to all social security schemes &
+15\% & Chinese gov. \\
+\(\xi_m\) & employee contribution rate to basic pension & 8\% & Chinese
+gov. \\
+\(\xi_h\) & employee contribution rate to housing provident fund & 5\% &
+Chinese gov. \\
+\(\xi_n\) & employer's match contribution rate to basic pension & 16\% &
+Chinese gov. \\
+\(\xi_p\) & tax rate for withdrawals from private pension & 3\% &
+Chinese gov. \\
+\textbf{Housing and Investment} & & & \\
+\(S_{max}\) & private pension saving limit & 12,000 & Chinese gov. \\
+\(\xi_a\) & ratio of overdraft limit to labor income & 50\% &
+calibration \\
+\(\bar{D}_H\) & housing fund loan ceiling & 600,000 & calibration \\
+\(\phi_{rp}\) & rent-to-price ratio & 1/600 & calibration \\
+\(\phi_{buy}\) & transaction-cost-to-home-value ratio in home buying &
+5\% & calibration \\
+\(\phi_{lv}\) & loan-to-value ratio & 0.7 & calibration \\
+\(\phi_{h}\) & maximum ratio of housing fund loan to housing fund
+account balance & 15 & calibration \\
+\(m\) & mortgage term & 20 & calibration \\
+\textbf{Tax and Government Transfer} & & & \\
+\(\Gamma\) & fixed special additional deduction & 12,000 & Chinese
+gov. \\
+\(\underline{Y}\) & tax-exempt income threshold & 60,000 & Chinese
+gov. \\
+\(\underline{c}\) & consumption floor & 3,6000 & calibration \\
+\(\delta^l_0\) & average taxation level & 0.15 & estimation \\
+\(\delta^l_1\) & elasticity of post-tax income to pre-tax income & 0.98
+& estimation \\
+\bottomrule()
+\end{longtable}
+
+\hypertarget{reference}{%
+\section*{Reference}\label{reference}}
+\addcontentsline{toc}{section}{Reference}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{1}{0}
+\leavevmode\vadjust pre{\hypertarget{ref-barro_fertility_1989}{}}%
+Barro, Robert J., and Gary S. Becker. 1989. {``Fertility Choice in a
+Model of Economic Growth.''} \emph{Econometrica} 57 (2): 481--501.
+\url{https://doi.org/10.2307/1912563}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-calvet_cross-section_2021}{}}%
+Calvet, Laurent, John Campbell, Francisco Gomes, and Paolo Sodini. 2021.
+{``The Cross-Section of Household Preferences.''} w28788. Cambridge,
+{MA}: National Bureau of Economic Research.
+\url{https://doi.org/10.3386/w28788}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-campbell_investing_2001}{}}%
+Campbell, John, Joao Cocco, Francisco Gomes, and Pascal Maenhout. 2001.
+{``Investing Retirement Wealth: A Life-Cycle Model.''} In \emph{Risk
+Aspects of Investment-Based Social Security Reform}, 439--82. National
+Bureau of Economic Research Conference Report. Chicago: University of
+Chicago Press. \url{https://doi.org/10.3386/w7029}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-cocco_portfolio_2005}{}}%
+Cocco, João F. 2005. {``Portfolio Choice in the Presence of Housing.''}
+\emph{Review of Financial Studies} 18 (2): 535--67.
+\url{https://doi.org/10.1093/rfs/hhi006}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-cocco_consumption_2005}{}}%
+Cocco, João F., Francisco J. Gomes, and Pascal J. Maenhout. 2005.
+{``Consumption and Portfolio Choice over the Life Cycle.''} \emph{Review
+of Financial Studies} 18 (2): 491--533.
+\url{https://doi.org/10.1093/rfs/hhi017}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-curtis_demographic_2015}{}}%
+Curtis, Chadwick C., Steven Lugauer, and Nelson C. Mark. 2015.
+{``Demographic Patterns and Household Saving in China.''} \emph{American
+Economic Journal: Macroeconomics} 7 (2): 58--94.
+\url{https://doi.org/10.1257/mac.20130105}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-curtis_demographics_2017}{}}%
+---------. 2017. {``Demographics and Aggregate Household Saving in
+Japan, China, and India.''} \emph{Journal of Macroeconomics} 51 (March):
+175--91. \url{https://doi.org/10.1016/j.jmacro.2017.01.002}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-de_nardi_why_2010}{}}%
+De Nardi, Mariacristina, Eric French, and John B. Jones. 2010. {``Why Do
+the Elderly Save? The Role of Medical Expenses.''} \emph{Journal of
+Political Economy} 118 (1): 39--75.
+\url{https://doi.org/10.1086/651674}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-duarte_simple_2021}{}}%
+Duarte, Victor, Julia Fonseca, Aaron Goodman, and Jonathan Parker. 2021.
+{``Simple Allocation Rules and Optimal Portfolio Choice over the
+Lifecycle.''} w29559. Cambridge, {MA}: National Bureau of Economic
+Research. \url{https://doi.org/10.3386/w29559}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-fang_chinese_2020}{}}%
+Fang, Hanming, and Jin Feng. 2020. {``The Chinese Pension System.''} In
+\emph{The Handbook of China's Financial System}, 421--43. Princeton:
+Princeton University Press. \url{https://lccn.loc.gov/2020005409}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-fang_demystifying_2016}{}}%
+Fang, Hanming, Quanlin Gu, Wei Xiong, and Li-An Zhou. 2016.
+{``Demystifying the Chinese Housing Boom.''} \emph{{NBER} Macroeconomics
+Annual} 30 (1): 105--66. \url{https://doi.org/10.1086/685953}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-french_distribution_2004}{}}%
+French, Eric, and John Bailey Jones. 2004. {``On the Distribution and
+Dynamics of Health Care Costs.''} \emph{Journal of Applied Econometrics}
+19 (6): 705--21. \url{https://doi.org/10.1002/jae.790}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-guvenen_what_2021}{}}%
+Guvenen, Fatih, Fatih Karahan, Serdar Ozkan, and Jae Song. 2021. {``What
+Do Data on Millions of u.s. Workers Reveal about Lifecycle Earnings
+Dynamics?''} \emph{Econometrica} 89 (5): 2303--39.
+\url{https://doi.org/10.3982/ECTA14603}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-guvenen_nature_2014}{}}%
+Guvenen, Fatih, Serdar Ozkan, and Jae Song. 2014. {``The Nature of
+Countercyclical Income Risk.''} \emph{Journal of Political Economy} 122
+(3): 621--60. \url{https://doi.org/10.1086/675535}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-heathcote_optimal_2017}{}}%
+Heathcote, Jonathan, Kjetil Storesletten, and Giovanni L. Violante.
+2017. {``Optimal Tax Progressivity: An Analytical Framework.''}
+\emph{The Quarterly Journal of Economics} 132 (4): 1693--1754.
+\url{https://doi.org/10.1093/qje/qjx018}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-hubbard_importance_1994}{}}%
+Hubbard, R. Glenn, Jonathan Skinner, and Stephen P. Zeldes. 1994. {``The
+Importance of Precautionary Motives in Explaining Individual and
+Aggregate Saving.''} \emph{Carnegie-Rochester Conference Series on
+Public Policy} 40 (June): 59--125.
+\url{https://doi.org/10.1016/0167-2231(94)90004-3}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-koijen_health_2016}{}}%
+Koijen, Ralph S. J., Stijn Van Nieuwerburgh, and Motohiro Yogo. 2016.
+{``Health and Mortality Delta: Assessing the Welfare Cost of Household
+Insurance Choice: Health and Mortality Delta.''} \emph{The Journal of
+Finance} 71 (2): 957--1010. \url{https://doi.org/10.1111/jofi.12273}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-palumbo_uncertain_1999}{}}%
+Palumbo, Michael G. 1999. {``Uncertain Medical Expenses and
+Precautionary Saving Near the End of the Life Cycle.''} \emph{Review of
+Economic Studies} 66 (2): 395--421.
+\url{https://doi.org/10.1111/1467-937X.00092}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-yao_optimal_2005}{}}%
+Yao, Rui, and Harold H. Zhang. 2005. {``Optimal Consumption and
+Portfolio Choices with Risky Housing and Borrowing Constraints.''}
+\emph{Review of Financial Studies} 18 (1): 197--239.
+\url{https://doi.org/10.1093/rfs/hhh007}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-yogo_portfolio_2016}{}}%
+Yogo, Motohiro. 2016. {``Portfolio Choice in Retirement: Health Risk and
+the Demand for Annuities, Housing, and Risky Assets.''} \emph{Journal of
+Monetary Economics} 80 (June): 17--34.
+\url{https://doi.org/10.1016/j.jmoneco.2016.04.008}.
+
+\end{CSLReferences}
+
+\end{document}
